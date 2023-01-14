@@ -1,6 +1,6 @@
 ---
 title: About
-author: Tao He
+author: YJ Kim
 date: 2022-02-04
 category: Jekyll
 layout: post

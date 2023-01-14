@@ -1,6 +1,6 @@
 ---
 title: Wide tables
-author: Tao He
+author: YJ Kim
 date: 2022-06-26
 category: Jekyll
 layout: post

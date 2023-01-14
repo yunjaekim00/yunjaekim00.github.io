@@ -1,6 +1,6 @@
 ---
 title: Page with cover image
-author: Tao He
+author: YJ Kim
 date: 2022-05-24
 category: Jekyll
 layout: post
@@ -13,7 +13,7 @@ a `cover` field to the page metadata:
 ```diff
   ---
   title: Page with cover image
-  author: Tao He
+  author: YJ Kim
   date: 2022-05-24
   category: Jekyll
   layout: post
