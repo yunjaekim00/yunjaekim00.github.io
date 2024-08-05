@@ -1,0 +1,340 @@
+@import url("https://fonts.googleapis.com/css2?family=Zain:wght@200;300;400;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Merriweather+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff");
+/*@import url("https://webfontworld.github.io/kyobobook/KyoboHandwriting2019.css");*/
+@import url("https://fonts.googleapis.com/css2?family=Allura&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Parisienne&display=swap");
+
+@font-face {
+  font-family: "NanumAInMamSonGeurSsi";
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/clova/NanumAInMamSonGeurSsi.eot);
+  src: url(https://hangeul.pstatic.net/hangeul_static/webfont/clova/NanumAInMamSonGeurSsi.eot?#iefix)
+      format("embedded-opentype"),
+    url(https://hangeul.pstatic.net/hangeul_static/webfont/clova/NanumAInMamSonGeurSsi.woff)
+      format("woff"),
+    url(https://hangeul.pstatic.net/hangeul_static/webfont/clova/NanumAInMamSonGeurSsi.ttf)
+      format("truetype");
+}
+
+/*
+@font-face {
+  font-family: "KyoboHand";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff")
+    format("woff");
+  font-weight: 400;
+}
+*/
+@font-face {
+  font-family: "KyoboHandwriting2019";
+  font-weight: normal;
+  font-style: normal;
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot");
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.ttf")
+      format("truetype");
+  font-display: swap;
+}
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #2e8555;
+  --ifm-color-primary-dark: #29784c;
+  --ifm-color-primary-darker: #277148;
+  --ifm-color-primary-darkest: #205d3b;
+  --ifm-color-primary-light: #33925d;
+  --ifm-color-primary-lighter: #359962;
+  --ifm-color-primary-lightest: #3cad6e;
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+}
+
+/* For readability concerns, you should choose a lighter palette in dark mode. */
+[data-theme="dark"] {
+  --ifm-color-primary: #25c2a0;
+  --ifm-color-primary-dark: #21af90;
+  --ifm-color-primary-darker: #1fa588;
+  --ifm-color-primary-darkest: #1a8870;
+  --ifm-color-primary-light: #29d5b0;
+  --ifm-color-primary-lighter: #32d8b4;
+  --ifm-color-primary-lightest: #4fddbf;
+  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+}
+
+/*? 전체 바탕 */
+:root .review {
+  /*color: rgb(35, 27, 24);*/
+  /*box-shadow: 2px 3px 20px #c7c0bc, 0 0 60px #b09c8a inset;*/
+  background: transparent;
+  /*--font-size-zain: 1.3rem;
+  --font-size-nanum: 1.9rem;*/
+}
+
+/*? Light Theme에서 배경 테두리 약간 어둡게  */
+.theme-light .review {
+  background: #fff0e8cc;
+  box-shadow: 2px 3px 20px #fff0e8, 0 0 30px #d9c3b0 inset;
+}
+
+.review :is(h1, .HyperMD-header.HyperMD-header-1) {
+  text-align: center;
+  font-family: "Merriweather";
+  font-size: 2.2rem;
+  line-height: 3rem;
+  /*padding: 0 0 1rem 0;*/
+  /*margin: 0 0 1rem 0;*/
+}
+/*? H2 styling */
+.review :is(h2, .HyperMD-header.HyperMD-header-2) {
+  font-size: 1.7rem !important;
+  color: #ffd675;
+  font-family: "Spoqa Han Sans Neo";
+  /*letter-spacing: -0.01rem;*/
+  font-weight: 400;
+  line-height: 2.2rem;
+  padding: 0 0 0.2rem 0 !important;
+}
+
+/*? H3 styling */
+.review :is(h3, .HyperMD-header.HyperMD-header-3) {
+  font-size: 1.6rem;
+  font-family: "Comic Neue", "KyoboHand";
+  line-height: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.02rem;
+  padding: 0.3rem 0 0.3rem 0 !important;
+}
+/*? H4 styling */
+.review :is(h4, .HyperMD-header.HyperMD-header-4) {
+  font-size: 1.3rem;
+  font-family: "Pretendard";
+  font-weight: 400;
+  letter-spacing: -0.02rem;
+  line-height: 1.6rem;
+  padding: 0.3rem 0 0.3rem 0 !important;
+}
+
+/**------------------------------------------*/
+/*? 일반 text */
+/**------------------------------------------*/
+.root {
+  font-size: 1.3rem;
+  font-family: "Comic Neue", "KyoboHand";
+  line-height: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.01rem;
+}
+
+/**------------------------------------------*/
+/*? Block quote */
+/**------------------------------------------*/
+.review :is(div:not(.CodeMirror-activeline) > .HyperMD-quote) {
+  font-family: "Comic Neue", "KyoboHand";
+  letter-spacing: 0.02rem;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  font-weight: 400;
+  background: #393735 !important;
+  border-radius: 15px 15px 15px 15px;
+  padding-right: 1rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.3rem;
+}
+
+/* light theme의 blockquote 배경 */
+.review :is(.theme-light div:not(.CodeMirror-activeline) > .HyperMD-quote) {
+  background: #ffd7b79e !important;
+}
+
+/* 읽기 모드에서의 Block quote */
+.review :is(.markdown-preview-view blockquote) {
+  font-family: "Comic Neue", "KyoboHand";
+  letter-spacing: 0.02rem;
+  font-size: 1.3rem;
+  line-height: 1.8rem;
+  font-weight: 400;
+  background: #393735 !important;
+  border-radius: 15px 15px 15px 15px;
+  padding-right: 1rem;
+  padding-top: 1.2rem;
+  padding-bottom: 1.3rem;
+}
+
+/**------------------------------------------*/
+/*? Custom CSS classes */
+/**------------------------------------------*/
+.review :is(.cite) {
+  position: absolute;
+  bottom: 0.3rem;
+  right: 2rem;
+  font-family: "Comic Neue";
+  font-style: italic;
+  text-align: right;
+  font-size: 1.2rem;
+}
+
+.review :is(.kor1) {
+  font-family: "Zain", "나눔손글씨 왼손잡이도 예뻐";
+  line-height: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.02rem;
+  font-size: 1.7rem;
+  /*margin: 0.4rem 0 0.4rem 0;*/
+}
+.review :is(.kor2) {
+  font-family: "나눔손글씨 배은혜체";
+  line-height: 2rem;
+  font-weight: 300;
+  letter-spacing: 0.05rem;
+  font-size: 1.9rem;
+  /*margin: 0.4rem 0 0.4rem 0;*/
+}
+.review :is(.kor3) {
+  font-family: "NanumAInMamSonGeurSsi";
+  line-height: 2rem;
+  font-weight: 300;
+  /*letter-spacing: -0.02rem;*/
+  font-size: 1.7rem;
+  /*margin: 0.4rem 0 0.4rem 0;*/
+}
+.review :is(.eng1) {
+  font-family: "Comic Shanns", "KyoboHand";
+  line-height: 2rem;
+  font-weight: 400;
+  /*letter-spacing: 0.09rem;*/
+  font-size: 1.2rem;
+  /*margin: 0.4rem 0 0.4rem 0;*/
+}
+.review :is(.eng2) {
+  font-family: "iA Writer Quattro S", "KyoboHand";
+  line-height: 2rem;
+  font-weight: 300;
+  letter-spacing: -0.06rem;
+  font-size: 1.2rem;
+  /*margin: 0.4rem 0 0.4rem 0;*/
+}
+.review :is(.eng3) {
+  font-family: "Parisienne", "나눔손글씨 배은혜체";
+  line-height: 2rem;
+  font-weight: 400;
+  letter-spacing: 0.09rem;
+  font-size: 1.5rem;
+  /*margin: 0.4rem 0 0.4rem 0;*/
+}
+
+/**------------------------------------------*/
+/*? Block quoted의 왼쪽 bar 없애기 */
+/**------------------------------------------*/
+.review div:not(.CodeMirror-activeline) > .HyperMD-quote::before {
+  content: "" !important;
+  position: absolute !important;
+  height: 0 !important;
+}
+.review div:not(.CodeMirror-activeline) > .HyperMD-quote::after {
+  content: "";
+  position: absolute;
+  bottom: 0.25px;
+  left: 0.75rem;
+  height: 1px;
+  width: 97%;
+  background: linear-gradient(270deg, var(--text-accent), #404040);
+}
+
+/**------------------------------------------*/
+/*? Code Block */
+/**------------------------------------------*/
+.review :is(.cm-s-obsidian .HyperMD-codeblock) {
+  font-family: "Comic Mono", "Monaco", "KyoboHand";
+  /*font-size: 0.95rem;*/
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+/* Inline (Text) Code */
+.review :is(.cm-s-obsidian span.cm-inline-code) {
+  font-family: "Comic Neue", "KyoboHand";
+  font-size: 1.3rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.03rem !important;
+}
+
+/**------------------------------------------*/
+/*? CALLOUT snippets for ADMONITION plugin */
+/**------------------------------------------*/
+.review :is(.callout) {
+  border-radius: 1rem;
+}
+/* icon과 제목의 간격 */
+.review
+  :is(
+    .callout:not([data-callout-metadata*="revert"]):not(.is-collapsible)
+      > .callout-title
+      .callout-title-inner
+  ) {
+  padding: 0.1rem 0.5rem 0.2rem 0.5rem;
+}
+/* icon과 왼쪽 padding */
+.review :is(.callout:not([data-callout-metadata*="revert"]) .callout-title) {
+  padding: 0.4rem 0 0.3rem 1.2rem;
+}
+
+/* 본문 */
+.review :is(.callout-content > p:first-child),
+.review :is(.callout-content > ul:first-child),
+.review :is(.callout-content > ol:first-child),
+.review :is(.callout-content > p:last-child),
+.review :is(.callout-content > ul:last-child),
+.review :is(.callout-content > ol:last-child) {
+  font-family: "Comic Neue", "KyoboHandwriting2019";
+  font-size: 1.3rem;
+  line-height: 1.9rem;
+  font-weight: 300;
+  letter-spacing: 0.02rem;
+}
+
+/* 배경색 */
+.review
+  :is(
+    .anp-callout-sleek
+      .callout:not(
+        [data-callout-metadata*="anp-block"],
+        [data-callout-metadata*="anp-vanilla-normal"],
+        [data-callout-metadata*="anp-vanilla-plus"]
+      ):not(
+        [data-callout-metadata*="revert"],
+        [data-callout="blank-container"],
+        [data-callout="multi-column"]
+      ),
+    .callout[data-callout-metadata*="anp-sleek"]:not(
+        [data-callout-metadata*="revert"],
+        [data-callout="blank-container"],
+        [data-callout="multi-column"]
+      )
+  ) {
+  background-color: #403836;
+}
+.theme-light
+  .review
+  :is(
+    .anp-callout-sleek
+      .callout:not(
+        [data-callout-metadata*="anp-block"],
+        [data-callout-metadata*="anp-vanilla-normal"],
+        [data-callout-metadata*="anp-vanilla-plus"]
+      ):not(
+        [data-callout-metadata*="revert"],
+        [data-callout="blank-container"],
+        [data-callout="multi-column"]
+      ),
+    .callout[data-callout-metadata*="anp-sleek"]:not(
+        [data-callout-metadata*="revert"],
+        [data-callout="blank-container"],
+        [data-callout="multi-column"]
+      )
+  ) {
+  background-color: #ffdbc0;
+}
