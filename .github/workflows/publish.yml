@@ -30,7 +30,7 @@ jobs:
           static_site_generator: react
 
       - name: Build with React 🏗️
-        run: docusaurus build
+        run: npm run build
 
       - name: Upload artifact 📡
         uses: actions/upload-pages-artifact@v3
