@@ -1,0 +1,10 @@
+{
+  "label": "IT 기타",
+  "position": 2,
+  "collapsible": true,
+  "collapsed": true,
+  "link": {
+    "type": "generated-index",
+    "description": "IT관련 잡다 글"
+  }
+}
