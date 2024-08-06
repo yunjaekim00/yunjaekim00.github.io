@@ -41,6 +41,8 @@ const config = {
       ({
         docs: {
           sidebarPath: './sidebars.js',
+          showLastUpdateAuthor: true,
+          showLastUpdateTime: true,
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           //editUrl:

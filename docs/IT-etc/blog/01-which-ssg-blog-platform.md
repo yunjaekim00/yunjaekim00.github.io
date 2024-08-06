@@ -1,10 +1,11 @@
 ---
-gitTimestamp: "2024-08-05"
+author: John Doe
+date: 1994-10-11
 ---
 
 # Docusaurus를 Github Pages에 배포하기
 
-## 어떤 플랫폼을 블로그 사용할까
+## 어떤 플랫폼을 블로그로 사용할까
 
 Medium, WordPress, 네이버, Wix, Notion 여러가지를 고려하다가
 티스토리를 쓴 지 1년 정도 되었다.
