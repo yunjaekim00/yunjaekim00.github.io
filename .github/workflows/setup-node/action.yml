@@ -8,6 +8,9 @@ runs:
       with:
         node-version: 20
 
+    - name: Install pnpm
+      run: npm install -g pnpm
+
     - name: Install dependencies
       shell: bash
-      run: npm install
+      run: pnpm install
