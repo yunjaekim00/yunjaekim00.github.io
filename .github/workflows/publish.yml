@@ -9,30 +9,21 @@ permissions:
   pages: write
   id-token: write
 
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
-
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js ⚙️ - Cache dependencies ⚡ - Install dependencies 🔧
+      - name: Setup Node.js and install dependencies
         uses: ./.github/workflows/setup-node
 
-      - name: Setup Pages ⚙️
-        uses: actions/configure-pages@v4
-        #with:
-        #  static_site_generator: react
-
-      - name: Build with React 🏗️
+      - name: Build with React
         run: npm run build
 
-      - name: Upload artifact 📡
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./build
@@ -46,6 +37,6 @@ jobs:
     needs: build
 
     steps:
-      - name: Publish to GitHub Pages 🚀
+      - name: Publish to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
