@@ -1,6 +1,3 @@
----
-gitTimestamp: "2024-08-05"
----
 # Nextra installation
 참조: https://nextra.site/docs/docs-theme/start  
 
