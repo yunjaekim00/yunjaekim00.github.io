@@ -61,13 +61,16 @@ React를 개발한 Meta에서
 React로 개발한 오픈소스  
 https://docusaurus.io/  
 Meta에서 만들었으니 믿을 수 있고, 꾸준히 업데이트 되는 것 같다.  
-기본으로 제공하는 UI가 살짝 마음에 안 들었지만 Nextra보다 업데이트가 최신이라 이것으로 선택
+기본으로 제공하는 UI가 살짝 마음에 안 들었지만 Nextra보다 업데이트가 최신이라 이것으로 선택  
+최신 버전이 3.4.0인데 올해(2024년) 5월에 업데이트 된 듯.  
+라인의 블록체인 부서에서 사용 → https://docs-blockchain.line.biz/overview/  
 
 #### 2. VuePress
 
 https://v2.vuepress.vuejs.org/guide/getting-started.html  
 꾸준히 개발 중인듯하고 UI도 깔끔하다.  
-그러나 Vue기반은 그냥 싫다.
+그러나 Vue기반은 그냥 싫다.  
+라인에서는 이거 쓰나보다. https://developers.line.biz/en/
 
 #### 3. MkDocs
 

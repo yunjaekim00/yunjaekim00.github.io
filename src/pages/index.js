@@ -16,12 +16,21 @@ function HomepageHeader() {
           {siteConfig.title}
         </Heading>
         <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/Welcome/intro">
-            Welcome to YJK's blog
-          </Link>
+        <div className={clsx(styles.buttoncontainer)}>
+          <div className={clsx(styles.buttons)}>
+            <Link
+              className="button button--secondary button--lg"
+              to="/docs/intro">
+              YJK's blog
+            </Link>
+          </div>
+          <div className={clsx(styles.buttons)}>
+            <Link
+              className="button button--secondary button--lg"
+              to="https://x2bee.tistory.com">
+              Plateer 연구소 블로그
+            </Link>
+          </div>
         </div>
       </div>
     </header>
