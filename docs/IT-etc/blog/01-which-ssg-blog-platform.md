@@ -1,7 +1,3 @@
----
-author: John Doe
-date: 1994-10-11
----
 
 # Docusaurus를 Github Pages에 배포하기
 
