@@ -3,6 +3,7 @@ import Link from '@docusaurus/Link';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 //import HomepageFeatures from '@site/src/components/HomepageFeatures';
+import Head from '@docusaurus/Head'
 
 import Heading from '@theme/Heading';
 import styles from './index.module.css';
@@ -11,6 +12,7 @@ function HomepageHeader() {
   const { siteConfig } = useDocusaurusContext();
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
+
       <div className="container">
         <Heading as="h1" className="hero__title">
           {siteConfig.title}
@@ -43,6 +45,20 @@ export default function Home() {
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />">
+      <Head>
+
+        {/* Google Tag Manager (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-004G82VRB6"></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-004G82VRB6');
+          `}
+        </script>
+
+      </Head>
       <HomepageHeader />
       {/*<main>*/}
       {/*<HomepageFeatures />*/}
