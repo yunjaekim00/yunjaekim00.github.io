@@ -1,8 +1,3 @@
----
-last_update:
-  date: 2024-08-06
----
-
 # last update time 넣기
 여기 글 맨 아래 오른쪽으로 보면  
  
@@ -38,8 +33,8 @@ const config = {
 
 local에서 실행할 때는 `pnpm start`로 실시간 보기할 때는 나오지 않고 `pnpm build` → `pnpm serve`해야지 최종 수정 날짜가 표시된다.  
   
-마지막으로 모든 markdown 글마다 front matter를 다음과 같이 넣어주어야 한다.  
-(생략하면 언제 썼든지 모든 글들이 자동으로 오늘 날짜에 업데이트 된 것으로 나온다.)  
+마지막으로 모든 markdown 글마다 front matter를 다음과 같이 넣어주면 default(오늘 날짜)가 overriding된다.  
+(생략해도 자동으로 오늘 날짜에 업데이트 된 것으로 나온다.)  
   
 ```md
 ---
