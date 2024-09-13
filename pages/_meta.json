@@ -1,0 +1,14 @@
+{
+  "index": {
+    "title": "Home",
+    "theme": {
+      "layout": "full"
+    }
+  },
+  "---": {
+    "type": "separator"
+  },
+  "IT-etc": {
+    "title": "IT 잡다"
+  }
+}
