@@ -1,4 +1,4 @@
-//import { useConfig } from "nextra-theme-docs";
+import { useConfig } from "nextra-theme-docs";
 
 export default {
   logo: <span>YJK's blog</span>,

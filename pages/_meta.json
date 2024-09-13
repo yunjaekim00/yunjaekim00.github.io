@@ -8,7 +8,10 @@
   "---": {
     "type": "separator"
   },
-  "IT-etc": {
+  "assets": {
+    "display": "hidden"
+  },
+  "06.IT-etc": {
     "title": "IT 잡다"
   }
 }
