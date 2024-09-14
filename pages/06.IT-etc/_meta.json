@@ -1,5 +1,8 @@
 {
   "blog": {
     "title": "블로그"
+  },
+  "docusaurus": {
+    "title": "Docusaurus"
   }
 }
