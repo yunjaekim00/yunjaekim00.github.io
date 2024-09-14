@@ -9,13 +9,13 @@ runs:
         node-version: 20
 
     - name: Check for pnpm
-    shell: bash
-    run: |
-      if ! command -v pnpm > /dev/null; then
-        npm install -g pnpm
-      else
-        echo "pnpm is already installed"
-      fi
+      shell: bash
+      run: |
+        if ! command -v pnpm > /dev/null; then
+          npm install -g pnpm
+        else
+          echo "pnpm is already installed"
+        fi
 
     - name: Install dependencies
       shell: bash
