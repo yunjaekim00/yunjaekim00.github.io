@@ -1,6 +1,6 @@
 ---
 title: installation
-date: 2024-08-05
+date: "2024-08-05"
 ---
 
 # Docusaurus Installation
