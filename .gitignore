@@ -11,6 +11,6 @@ yarn.lock
 /out/
 
 # obsidian
-/pages/assets/
-/pages/.obsidian/
-/pages/.trash/
+assets/
+.obsidian/
+.trash/
