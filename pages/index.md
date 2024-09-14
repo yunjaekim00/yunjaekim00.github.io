@@ -9,4 +9,4 @@ date: "2024-09-15"
 
 👀 I’m a DevOps engineer at Plateer Inc. in Korea.
 
-🌱 I’m also an AWS and Azure administrator of Plateer Inc.
+🌱 I’m also Plateer’s AWS and Azure administrator.
