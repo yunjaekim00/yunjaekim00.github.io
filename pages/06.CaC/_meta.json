@@ -1,6 +1,9 @@
 {
-  "blog": {
-    "title": "블로그"
+  "content-as-code": {
+    "title": "Content as Code"
+  },
+  "---": {
+    "type": "separator"
   },
   "docusaurus": {
     "title": "Docusaurus"
