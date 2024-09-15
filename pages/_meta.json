@@ -1,14 +1,15 @@
 {
   "index": {
     "title": "Welcome",
+    "display": "hidden",
     "type": "page",
     "theme": {
       "sidebar": false,
       "layout": "full"
     }
   },
-  "06.IT-etc": {
-    "title": "IT 잡다",
+  "06.CaC": {
+    "title": "CaC",
     "type": "page"
   },
   "07.Book-review": {

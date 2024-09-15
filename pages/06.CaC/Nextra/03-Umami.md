@@ -4,10 +4,11 @@ date: "2024-09-16"
 ---
 
 # Umami 설치
+
 블로그에 통계를 보기 위해 Google Analytics를 연동 시키는 것은  
 왠지 오버 엔지니어링의 느낌이 든다.  
 이 블로그로 수익을 창출할 것이 아니고 그냥 단순히 조회수가 궁금해서 설치하는 것 뿐인데  
-그래서 umami라는 사이트 https://us.umami.is/ 를 이용해보기로 하였다.  
+그래서 umami라는 사이트 https://us.umami.is 를 이용해보기로 하였다.
 
 umami cloud를 위해 회원가입하고 인증 절차를 마치면  
 어떤 `<script>` 코드를 `<head>`에 넣으라고 나온다.
@@ -16,7 +17,7 @@ umami cloud를 위해 회원가입하고 인증 절차를 마치면
 Nextra 공식 문서에 기본 파일을 오버라이딩하는 방법이 나와있다.  
 참조: https://nextra.site/docs/guide/custom-css
 
-그래서 umami에서 알려준 코드를 `pages/_app.js` 파일에 다음과 같이 넣었다.  
+그래서 umami에서 알려준 코드를 `pages/_app.js` 파일에 다음과 같이 넣었다.
 
 ```js
 import Script from 'next/script';  // Import Script from Next.js
@@ -38,6 +39,6 @@ function MyApp({ Component, pageProps }) {
 export default MyApp;
 ```
 
-배포한 후 내가 내 블로그를 조회하니 실시간으로 통계가 나온다.  
+배포한 후 내가 내 블로그를 조회하니 실시간으로 통계가 나온다.
 
-![](./_images/Pasted%20image%2020240916045106.png)
+![](./_images/20240916045106.png)
