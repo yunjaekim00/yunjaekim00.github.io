@@ -4,5 +4,8 @@
   },
   "docusaurus": {
     "title": "Docusaurus"
+  },
+  "Nextra": {
+    "title": "Nextra"
   }
 }

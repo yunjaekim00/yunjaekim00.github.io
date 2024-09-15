@@ -1,6 +1,6 @@
 ---
-title: installation
-date: 2024-08-05
+title: Installation
+date: "2024-08-05"
 ---
 
 # Installation

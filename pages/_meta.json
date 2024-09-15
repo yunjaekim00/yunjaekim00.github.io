@@ -1,14 +1,18 @@
 {
   "index": {
-    "title": "Welcome"
-  },
-  "---": {
-    "type": "separator"
-  },
-  "assets": {
-    "display": "hidden"
+    "title": "Welcome",
+    "type": "page",
+    "theme": {
+      "sidebar": false,
+      "layout": "full"
+    }
   },
   "06.IT-etc": {
-    "title": "IT 잡다"
+    "title": "IT 잡다",
+    "type": "page"
+  },
+  "07.Book-review": {
+    "title": "Books",
+    "type": "page"
   }
 }
