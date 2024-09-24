@@ -1,6 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
+@import url("https://webfontworld.github.io/kyobobook/KyoboHandwriting2019.css");
 
-@font-face {
+/*@font-face {
   font-family: "KyoboHandwriting2019";
   src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot");
   src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot?#iefix")
@@ -12,7 +13,7 @@
     url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.ttf")
       format("truetype");
   font-display: swap;
-}
+}*/
 
 body {
   font-family: "Comic Neue", "KyoboHandwriting2019";

@@ -4,5 +4,11 @@
   },
   "02-navbar": {
     "title": "Nav bar"
+  },
+  "03-Umami": {
+    "title": "Umami"
+  },
+  "04-custom-css-1": {
+    "title": "Custom CSS (font style)"
   }
 }
