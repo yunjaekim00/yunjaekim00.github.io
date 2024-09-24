@@ -37,9 +37,9 @@ DaC는 Document as Code의 약자로 쓰이고,
 
 다시 위의 내용을 정리해서 말하자면, 기존 방식들은 Cloud 내에 있는 GUI-based CMS로 글을 쓰는 방식이다.  
 WordPress, Tistory, Medium, Naver blog 전부 그런 방식이다.  
-이 들의 장점은 software engineer가 아닌 사람도 쉽게 글과 이미지를 올릴 수 있는 장점이 있다.
+이 들의 장점은 software engineer가 아닌 사람도 쉽게 글과 이미지를 올릴 수 있는 장점이 있다.  
 그러나 HTML, CSS, Javascript와 같은 언어는 이미 30년을 살아남았지만  
-대부분 클라우드 플랫폼이 수년을 지속하지도 않고, 싫증이 나기도 한다.
+대부분 클라우드 플랫폼이 수년을 지속하지도 않고, 싫증이 나기도 한다.  
 
 이 걸 좀 더 멋드러진 표현으로 쓰자면  
 CaC의 장점은 내 글이 text 형태로 local 저장되므로  
@@ -102,8 +102,8 @@ Obsidian으로 내가 편집한 글을 바로 git push하면 블로그에 자동
 
 **내 기준**에서 **블로그**란 여기 사이트처럼 왼쪽에 Sidebar에 메뉴가 sub-folder처럼 계속 nested되는 구조의 블로그를 원했지만, 구글 검색어에 'blog'만 검색하면 계속 sidebar menu가 없는 사이트만 나온다.  
 그 이유는 외국에서는 **'blog'**라고 하면 대부분 side bar 메뉴가 없고, 태그로만 글 카테고리를 구분하고, 글 목록은 바둑판처럼 나열되있는 모양을 'blog'라고 칭하는 것 같다.  
-지금 이 페이지처럼 side bar에 sub-folder 같은 메뉴가 있는 블로그는 blog가 아닌 **Documentation** 이라고 부른다.  
-(외국인들의 정서인가 sidebar가 없으면 불편한 내가 문제인가)
+지금 이 페이지처럼 side bar에 sub-folder 같은 메뉴가 있는 블로그는 blog가 아닌 **Documentation** 이라고 부른다.    
+(외국인들의 정서인가 sidebar가 없으면 불편한 내가 문제인가)  
 
 Documentation 형식의 블로그로는 GitBook 정도가 있는 것 같은데,  
 SaaS 인데다가 오픈소스도 아니고 느리고, 게다가 완전 무료도 아니다. (누가 쓰냐)  
