@@ -23,11 +23,20 @@ body {
   font-family: "Comic Neue", "KyoboHandwriting2019";
 }
 
+/* 일반 텍스트 스타일 */
 .nextra-content p,
 .nextra-content li {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   font-weight: 400;
   line-height: 1.8rem;
-  color: var(--font-color);
+}
+
+/* inline code 스타일 */
+.nextra-content p code,
+.nextra-content li code {
+  font-family: "Comic Neue", "KyoboHandwriting2019";
+  font-size: 1.1rem;
+  font-weight: bold;
+  letter-spacing: 0.03rem;
 }
 ```
