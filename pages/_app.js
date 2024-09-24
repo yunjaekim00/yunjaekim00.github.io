@@ -1,4 +1,4 @@
-//import '../styles/globals.css';
+import '../styles/globals.css';
 import Script from 'next/script';  // Import Script from Next.js
 
 function MyApp({ Component, pageProps }) {

@@ -14,3 +14,7 @@ yarn.lock
 assets/
 .obsidian/
 .trash/
+
+# Mac
+.DS_Store
+.DS_Store
