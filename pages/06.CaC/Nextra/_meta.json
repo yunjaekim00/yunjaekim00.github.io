@@ -10,5 +10,8 @@
   },
   "04-custom-css-1": {
     "title": "Custom CSS (font style)"
+  },
+  "05-nav-bar": {
+    "title": "Nav bar customization"
   }
 }

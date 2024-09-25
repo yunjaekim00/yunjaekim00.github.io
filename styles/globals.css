@@ -40,3 +40,23 @@ body {
   font-weight: bold;
   letter-spacing: 0.03rem;
 }
+nav {
+}
+nav.nx-flex {
+  /*display: inline-flex;
+  width: 100%;*/
+}
+
+/* Target the navbar container */
+nav.nx-flex.nx-items-center.nx-mx-auto {
+  /*margin-top: -0.1rem;*/
+}
+
+nav.nx-flex.nx-items-center .nx-block {
+  margin-left: 1.75rem;
+}
+nav.nx-flex.nx-items-center a.nx-text-sm {
+  margin: 0 1rem 0 1rem;
+  padding: 0.4rem 0 0 0;
+  font-size: 1.125rem;
+}
