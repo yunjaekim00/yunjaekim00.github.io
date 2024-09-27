@@ -13,5 +13,8 @@
   },
   "05-nav-bar": {
     "title": "Nav bar customization"
+  },
+  "06-tailwind-install": {
+    "title": "Tailwind CSS 설치"
   }
 }
