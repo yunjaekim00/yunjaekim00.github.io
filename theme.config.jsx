@@ -14,6 +14,12 @@ export default {
   footer: {
     component: null,
   },
+  useNextSeoProps() {
+    return {
+      titleTemplate: "%s – YJK's blog",
+    };
+  },
+
   navigation: false,
   gitTimestamp: () => {
     const { frontMatter } = useConfig();
