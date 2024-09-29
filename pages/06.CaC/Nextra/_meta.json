@@ -16,5 +16,8 @@
   },
   "06-tailwind-install": {
     "title": "Tailwind CSS 설치"
+  },
+  "07-remark-breaks": {
+    "title": "remark-breaks 설치"
   }
 }

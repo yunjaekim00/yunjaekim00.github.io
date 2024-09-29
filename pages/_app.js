@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import Script from "next/script"; // Import Script from Next.js
+import Script from "next/script";
 
 function MyApp({ Component, pageProps }) {
 	return (
