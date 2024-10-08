@@ -1,0 +1,23 @@
+export default {
+  index: {
+    title: "Welcome",
+    display: "hidden",
+    type: "page",
+    theme: {
+      sidebar: false,
+      layout: "full",
+    },
+  },
+  "05.Infra": {
+    title: "Infra",
+    type: "page",
+  },
+  "06.CaC": {
+    title: "CaC",
+    type: "page",
+  },
+  "08.Book-review": {
+    title: "Books",
+    type: "page",
+  },
+};

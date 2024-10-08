@@ -6,6 +6,7 @@ const withNextra = nextra({
 	themeConfig: "./theme.config.jsx",
 	mdxOptions: {
 		remarkPlugins: [remarkBreaks],
+		//rehypePlugins: [rehypeRaw],
 	},
 });
 

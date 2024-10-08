@@ -1,0 +1,23 @@
+export default {
+  "01-installation": {
+    title: "Installation"
+  },
+  "02-navbar": {
+    title: "Nav bar"
+  },
+  "03-Umami": {
+    title: "Umami"
+  },
+  "04-custom-css-1": {
+    title: "Custom CSS (font style)"
+  },
+  "05-nav-bar": {
+    title: "Nav bar customization"
+  },
+  "06-tailwind-install": {
+    title: "Tailwind CSS 설치"
+  },
+  "07-remark-breaks": {
+    title: "remark-breaks 설치"
+  }
+}
