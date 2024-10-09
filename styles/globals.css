@@ -31,13 +31,8 @@
 }
 
 body {
-  font-family: "Comic Neue", "KyoboHandwriting2019";
+  font-family: "Comic Neue", "KyoboHandwriting2019", sans-serif;
 }
-/*@media (prefers-color-scheme: dark) {
-  body {
-    --font-color: white;
-  }
-}*/
 
 /* 일반 텍스트 스타일 */
 .nextra-content p,
@@ -71,7 +66,7 @@ body {
 
 img {
   margin-top: 1.2rem;
-  margin-bottom: 1rem;
+  /*margin-bottom: 0.5rem;*/
 }
 /* image center align */
 img[alt*="center"],

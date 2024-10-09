@@ -40,3 +40,25 @@ body {
   letter-spacing: 0.03rem;
 }
 ```
+
+위의 코드대로 했더니 Chrome 브라우저에서는 잘 뜨는데
+Safari browser에서는 뜨지 않는다.
+다음과 같이 `font-face` rule로 지정을 해주니 Safari 브라우저에서도 보인다.
+
+```css
+@font-face {
+  font-family: "KyoboHandwriting2019";
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot");
+  src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot?#iefix")
+      format("embedded-opentype"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.woff2")
+      format("woff2"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.woff")
+      format("woff"),
+    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.ttf")
+      format("truetype");
+  font-display: swap;
+}
+```
+
+`font-display: swap`은 폰트가 로딩이 되는 동안 fallback font로 일단 rendering 되는 것을 보장해준다.

@@ -38,3 +38,9 @@ Pending상태는 AWS console > EC2 > Images → AMIs 에서 확인할 수 있고
 백업의 **진행상태**는 AWS console > EC2 > Elastic Block Store → Snapshots에서 확인할 수 있다.
 
 ### AMI 복원하기
+AWS console > EC2 > Images → AMIs 메뉴에서 
+복원할 AMI를 선택하고 우측 상단에서 
+![](<./_images/Pasted image 20241009225641.png>)
+이 Launch instance from AMI를 선택한다.
+EC2 launch configuration이 나오면 적당한 instance type과 subnet을 고르고 생성한다.
+
