@@ -8,11 +8,25 @@ export default {
   feedback: {
     content: null,
   },
+  //themeSwitch: {
+  //  useOptions() {
+  //    return {
+  //      light: "Light",
+  //      dark: "Dark",
+  //      system: "System",
+  //    };
+  //  },
+  //},
   editLink: {
     component: null,
   },
   footer: {
     component: null,
+  },
+  sidebar: {
+    defaultMenuCollapseLevel: 1,
+    autoCollapse: true,
+    toggleButton: false,
   },
   useNextSeoProps() {
     return {

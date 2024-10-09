@@ -1,5 +1,5 @@
 ---
-title: AMI(Amazon Machine Image)
+title: AMI 백업과 복원
 date: 2024-10-08
 ---
 
@@ -26,7 +26,6 @@ EC2 instance를 생성하게 되면 자동으로 root EBS volume이라는 것이
 - AMI도 Snapshot처럼 Region에 묶이게 된다.
 
 ### AMI 백업하기
-
 - AWS console에서 백업할 EC2를 선택한 후 → Actions > Image and templates > Create image 를 하면 된다.
   ![centre|450](<./_images/20241008105956.png>)
   내가 백업하려는 instance에는 200Gb의 EBS가 붙어있는데,
@@ -36,4 +35,6 @@ EC2 instance를 생성하게 되면 자동으로 root EBS volume이라는 것이
 
 
 Pending상태는 AWS console > EC2 > Images → AMIs 에서 확인할 수 있고
-백업의 진행상태는 AWS console > EC2 >
+백업의 **진행상태**는 AWS console > EC2 > Elastic Block Store → Snapshots에서 확인할 수 있다.
+
+### AMI 복원하기

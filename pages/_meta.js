@@ -20,4 +20,8 @@ export default {
     title: "Books",
     type: "page",
   },
+  "09.작성중": {
+    title: "작성 중인 글들",
+    display: "hidden"
+  }
 };

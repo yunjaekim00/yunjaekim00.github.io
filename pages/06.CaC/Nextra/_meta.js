@@ -19,5 +19,11 @@ export default {
   },
   "07-remark-breaks": {
     title: "remark-breaks 설치"
+  },
+  "08-favicon": {
+    title: "favicon 등록"
+  },
+  "09-font-color": {
+    title: "Custom CSS (font color)"
   }
 }

@@ -2,10 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");
-@import url("https://webfontworld.github.io/kyobobook/KyoboHandwriting2019.css");
+/*@import url("https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap");*/
+/*@import url("https://fonts.googleapis.com/css2?family=Comic+Neue&display=swap");*/
 
-/*@font-face {
+@import url("https://fonts.cdnfonts.com/css/comic-neue");
+
+/*@import url("https://webfontworld.github.io/kyobobook/KyoboHandwriting2019.css");*/
+
+@font-face {
   font-family: "KyoboHandwriting2019";
   src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot");
   src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot?#iefix")
@@ -17,7 +21,14 @@
     url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.ttf")
       format("truetype");
   font-display: swap;
-}*/
+}
+
+:root {
+  --font-strong-color: darkslateblue;
+}
+.dark {
+  --font-strong-color: skyblue;
+}
 
 body {
   font-family: "Comic Neue", "KyoboHandwriting2019";
@@ -36,6 +47,10 @@ body {
   line-height: 1.8rem;
 }
 
+.nextra-content strong {
+  color: var(--font-strong-color);
+}
+
 /* inline code 스타일 */
 .nextra-content p code,
 .nextra-content li code {
@@ -44,24 +59,13 @@ body {
   font-weight: bold;
   letter-spacing: 0.03rem;
 }
-nav {
-}
-nav.nx-flex {
-  /*display: inline-flex;
-  width: 100%;*/
-}
 
-/* Target the navbar container */
-nav.nx-flex.nx-items-center.nx-mx-auto {
-  /*margin-top: -0.1rem;*/
+.nextra-nav-container img {
+  position: absolute;
+  top: -0.5rem;
 }
-
-nav.nx-flex.nx-items-center .nx-block {
-  margin-left: 1.75rem;
-}
-nav.nx-flex.nx-items-center a.nx-text-sm {
-  margin: 0 1rem 0 1rem;
-  padding: 0.4rem 0 0 0;
+.nextra-nav-container .nextra-focus {
+  padding: 0 0.5rem 0 0.5rem;
   font-size: 1.125rem;
 }
 

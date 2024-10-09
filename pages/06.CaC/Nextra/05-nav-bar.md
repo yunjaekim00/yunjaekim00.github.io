@@ -23,7 +23,22 @@ nav.nx-flex.nx-items-center a.nx-text-sm {
 ```
 
 수정 전 :  
-![](./_images/Pasted%20image%2020240925162331.png)
+![](<./_images/Pasted image 20240925162331.png>)
   
 수정 후 :  
-![](./_images/Pasted%20image%2020240925162441.png)
+![](<./_images/Pasted image 20240925162441.png>)
+
+이런... Nextra 2.14.3에서 3.0.6으로 업데이트하였더니 
+Nav bar 클래스명이 전부 바뀌어서 먹히지가 않는다.
+그래서 업그레이드 후 위 코드를 다음으로 바꾸었다.
+
+```css
+.nextra-nav-container img {
+  position: absolute;
+  top: -0.5rem;
+}
+.nextra-nav-container .nextra-focus {
+  padding: 0 0.5rem 0 0.5rem;
+  font-size: 1.125rem;
+}
+```
