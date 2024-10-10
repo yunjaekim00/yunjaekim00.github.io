@@ -62,3 +62,14 @@ Safari browser에서는 뜨지 않는다.
 ```
 
 `font-display: swap`은 폰트가 로딩이 되는 동안 fallback font로 일단 rendering 되는 것을 보장해준다.
+
+Safari에서 Comic Neue도 안 뜬다.
+이건 `_app.js`파일에 `<link>` 태그로 넣어준다.
+
+```jsx
+	<link
+			href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+			rel="stylesheet"
+		/>
+```
+

@@ -29,5 +29,20 @@ default로 font-weight만 강조가 되서 생각보다 돋보이지가 않는�
 dark mode에서 사용할 색을 지정해주고
 strong 태그에서 적용될 이 변수를 지정해준다.
 
+## default theme
+개인 취향상 내 OS는 dark mode가 좋은데
+내 블로그는 light mode로 보는 게 좋다.
+여러 가지 방법이 있을 것 같은데
+그냥 간편하게 `useEffect`로 `_app.js`에 설정하였다.
 
+```jsx
+import { useTheme } from "next-themes";
+import { useEffect } from "react";
+
+function MyApp({ Component, pageProps }) {
+	const { theme, setTheme } = useTheme();
+	useEffect(() => {
+		setTheme("light");
+	}, []);
+```
 

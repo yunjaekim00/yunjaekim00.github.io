@@ -9,7 +9,7 @@ export default {
     title: "Umami"
   },
   "04-custom-css-1": {
-    title: "Custom CSS (font style)"
+    title: "font style"
   },
   "05-nav-bar": {
     title: "Nav bar customization"
@@ -24,6 +24,9 @@ export default {
     title: "favicon 등록"
   },
   "09-font-color": {
-    title: "Custom CSS (font color)"
+    title: "font color / default theme"
+  },
+  "10-image-size": {
+    title: "image size"
   }
 }
