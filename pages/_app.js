@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import { useTheme } from "next-themes";
 import { useEffect } from "react";
 import Script from "next/script";
-import Head from "next/head";
+//import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
 	const { theme, setTheme } = useTheme();
@@ -33,12 +33,9 @@ function MyApp({ Component, pageProps }) {
 			</Script>
 
 			{/* Comic Neue Font */}
-			<Head>
-				<link
-					href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-					rel="stylesheet"
-				/>
-			</Head>
+
+
+
 			{/* Umami Analytics Script */}
 			<Script
 				src="https://cloud.umami.is/script.js"

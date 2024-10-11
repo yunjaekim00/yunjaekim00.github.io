@@ -7,6 +7,12 @@ const withNextra = nextra({
 	mdxOptions: {
 		remarkPlugins: [remarkBreaks],
 		//rehypePlugins: [rehypeRaw],
+		rehypePrettyCodeOptions: {
+			theme: {
+				dark: 'one-dark-pro',
+				light: 'one-light'
+			}
+		}
 	},
 });
 

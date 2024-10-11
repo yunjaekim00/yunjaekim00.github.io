@@ -2,6 +2,7 @@
 title: Umami 설치
 date: "2024-09-16"
 ---
+
 # Umami 설치
 
 블로그에 통계를 보기 위해 Google Analytics를 연동 시키는 것은  
@@ -18,7 +19,7 @@ Nextra 공식 문서에 기본 파일을 오버라이딩하는 방법이 나와�
 
 그래서 umami에서 알려준 코드를 `pages/_app.js` 파일에 다음과 같이 넣었다.
 
-```js
+```js showLineNumbers
 import Script from 'next/script';  // Import Script from Next.js
 
 function MyApp({ Component, pageProps }) {
