@@ -8,6 +8,10 @@ export default {
       layout: "full",
     },
   },
+  "04.DevOps": {
+    title: "DevOps",
+    type: "page",
+  },
   "05.Infra": {
     title: "Infra",
     type: "page",
