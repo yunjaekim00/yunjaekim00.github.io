@@ -41,6 +41,7 @@ body {
 }
 ```
 
+#### Safari에서 KyoboHand2019
 위의 코드대로 했더니 Chrome 브라우저에서는 잘 뜨는데
 Safari browser에서는 뜨지 않는다.
 다음과 같이 `font-face` rule로 지정을 해주니 Safari 브라우저에서도 보인다.
@@ -63,18 +64,28 @@ Safari browser에서는 뜨지 않는다.
 
 `font-display: swap`은 폰트가 로딩이 되는 동안 fallback font로 일단 rendering 되는 것을 보장해준다.
 
+#### Comic Neue 
 Safari에서 Comic Neue도 안 뜬다.
-이건 `theme.config.jsx`파일에 head로 넣어준다.
+`/pages/` 폴더 안에 `_documents.js` 파일을 생성한다. 다음 코드를 붙여넣어준다.
 
 ```jsx
-export default {
-  head: (
-    <>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
-        rel="stylesheet"
-      />
-    </>
-  ),
+import { Html, Head, Main, NextScript } from 'next/document';
+
+export default function Document() {
+	return (
+		<Html lang="en">
+			<Head>
+				<link
+					href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap"
+					rel="stylesheet"
+				/>
+			</Head>
+			<body>
+				<Main />
+				<NextScript />
+			</body>
+		</Html>
+	);
+}
 ```
 

@@ -3,7 +3,6 @@ import "../styles/globals.css";
 import { useTheme } from "next-themes";
 import { useEffect } from "react";
 import Script from "next/script";
-//import Head from "next/head";
 
 function MyApp({ Component, pageProps }) {
 	const { theme, setTheme } = useTheme();
@@ -19,6 +18,7 @@ function MyApp({ Component, pageProps }) {
 	}, []);
 	return (
 		<>
+			{/*<!-- Google tag (gtag.js) -->*/}
 			<Script
 				strategy="afterInteractive"
 				src="https://www.googletagmanager.com/gtag/js?id=G-2Q3CM48GRW"
@@ -32,19 +32,7 @@ function MyApp({ Component, pageProps }) {
         `}
 			</Script>
 
-			{/* Comic Neue Font */}
-
-
-
-			{/* Umami Analytics Script */}
-			<Script
-				src="https://cloud.umami.is/script.js"
-				data-website-id="acd1907e-3e2b-470d-bda6-8bd7b31819d6"
-				strategy="lazyOnload"
-			/>
-			{/*<!-- Google tag (gtag.js) -->*/}
-
-			{/*<ThemeProvider defaultTheme='light'>*/}
+			{/*<ThemeProvider>*/}
 			<Component {...pageProps} />
 			{/*</ThemeProvider>*/}
 		</>
