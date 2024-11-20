@@ -20,7 +20,7 @@ const nextConfig = {
 	images: {
 		unoptimized: true,
 	},
-	output: "export",
+	//output: "export",   // github.io에 배포할 때는 이 line 주석 해제
 	reactStrictMode: false,
 };
 
