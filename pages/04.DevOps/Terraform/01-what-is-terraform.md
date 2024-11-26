@@ -28,7 +28,7 @@ date: 2024-11-26
 ### How does Terraform work?
 AWS와 같은 곳에 접속해서 infra 구성을 어떻게 할까? Terraform has 2 main components
 #### 1. two inputs
-![center|400](<./_images/Pasted image 20241126164200.png>)
+![center|400](<./_images/Pasted image 20241126170527.png>)
 Core가 current state와 config file (desired state)를 비교하고 무엇이 created/updated/destroyed 되야 하는지 순서를 정해서 실행 → 그래서 code block의 순서가 바뀌어도 Terraform이 알아서 순서를 스스로 정함
 #### 2. providers
 AWS / Azure 등 IaaS providers도 있고
@@ -52,10 +52,10 @@ VS code에 Terraform extension 설치
 syntax highlighting과 autocompletion 기능 등을 제공해준다.
 
 아래 공식 플러그인도 좋지만
-![](<./_images/Pasted image 20241126164243.png>)
+![center|400](<./_images/Pasted image 20241126164243.png>)
 
 아래 플러그인이 별점이 더 높다
-![](<./_images/Pasted image 20241126164256.png>)
+![center|400](<./_images/Pasted image 20241126164256.png>)
 
 ### Terraform summary
 - universal IaC tool
