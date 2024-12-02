@@ -1,8 +1,7 @@
 ---
-title: 10 Provision EC2 - 2
+title: 10 Provision EC2 - 3
 date: 2024-12-02
 ---
-
 ### Run entry point script to start Docker container
 `user_data`라는 attribute는 EC2가 생성되고 실행이 될 수 있는 script
 ```hcl
