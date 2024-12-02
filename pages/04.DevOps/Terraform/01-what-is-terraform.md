@@ -16,9 +16,9 @@ cssclasses:
 - declarative approach : I need 7 servers → i need 5 servers
 - imperative approach : Create 7 servers → remove 2 servers 
 ##### 역사
+- HCL이 대세가 되기 전에는 명령형 언어도 시도가 된 적이 있었다. 그러나 nested 구조, 현재 state checking 등으로 코드가 너무 쉽게 스파게티 코드가 되어 유지가 힘들었다. 자연스럽게 industry standard format인 JSON이나 YAML형태와 같은 선언형 코드가 대세가 되었다. → 그러나 이 형태도 for loop이나 annotation이 필요한 경우 구현하기 힘들었다. 이에 Terraform은 선언형을 바탕에 두면서도 loop 등의 기능, top-down 접근 방식 등을 택하였다.
 - open source : 2023년 8월부터는 HashiCorp가 MPL(Mozilla Public License) 2.0 에서 → BSL(Business Source License)로 전환 → commercial use에서는 유료 
 - **BSL**에 대해서 좀 더 구체적으로 말하자면 내가 SI 파견을 나가서 내 local PC에서 Terraform을 이용해 AWS cloud infra를 생성하건 AWS console에서 버튼 클릭으로 수동으로 생성하건 이것은 알 방법이 없다. 단지 Terraform으로 짜여진 DevOps 자동화 플랫폼을 상업적으로 팔려고 할 때 competitive use라고 판단한다.
-- HCL이 대세가 되기 전에는 명령형 언어도 시도가 된 적이 있었다. 그러나 nested 구조, 현재 state checking 등으로 코드가 너무 쉽게 스파게티 코드가 되어 유지가 힘들었다. 자연스럽게 industry standard format인 JSON이나 YAML형태와 같은 선언형 코드가 대세가 되었다. → 그러나 이 형태도 for loop이나 annotation이 필요한 경우 구현하기 힘들었다. 이에 Terraform은 선언형을 바탕에 두면서도 loop 등의 기능, top-down 접근 방식 등을 택하였다.
 
 #### Ansible과 Terraform의 차이점
 - 둘 다 IaC (Infrastructure as a Code)
@@ -27,6 +27,13 @@ cssclasses:
 - **Ansible** is mainly a *configuration tool* - once the infrastructure is there, Ansible can configure that infrastructure, deploy apps or install/update software
 - 그래서 이 두 가지 도구가 겹치는 영역이 있기는 하다.
 - Ansible is more mature, and Terraform is relatively new (and thus changing dynamically) and more advanced in orchestration
+
+#### 궁금증
+Code를 통해 복잡한 구조의 인프라를 한 방에 만드는 것이라면, 똑같은 환경을 자주 생성하고 소멸시킬 때만 필요한 것이 아닌가? 라는 생각이 들 수 있다.
+어느 정도 맞는 말이긴 하지만, Terraform은 항상 현재 state를 가져와서 누가 변동한 사항이 있나 체크도 하기 때문에 운영하기에도 편하다.
+
+또 현재 AWS에 여러 개의 자원이 이미 생성되어있는데 여기에 Terraform을 적용해도 되는지 궁금증이 들 수도 있다. 
+테라폼은 항상 내가 코드로 생성한 부분에 대해서 (예를들면 이미 있는 VPC에 subnet을 새로 생성하면 그 subnet)만 보기 때문에 일부분만 적용해도 문제가 없다.
 
 ### How does Terraform work?
 AWS와 같은 곳에 접속해서 infra 구성을 어떻게 할까? Terraform has 2 main components
