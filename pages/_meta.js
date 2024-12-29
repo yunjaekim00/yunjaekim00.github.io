@@ -8,6 +8,10 @@ export default {
       layout: "full",
     },
   },
+  "02.AI": {
+    title: "AI",
+    type: "page",
+  },
   "03.FrontEnd": {
     title: "FrontEnd",
     type: "page",
