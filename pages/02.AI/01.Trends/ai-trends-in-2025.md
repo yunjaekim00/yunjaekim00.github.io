@@ -9,7 +9,7 @@ date: 2024-12-29
 ### 1. AGI (Artificial General Intelligence)
 정의 : 인간처럼 학습하고 사고하고, 인간의 지능과 비슷하거나 넘어서는 것.
 특정 기능만 인간을 흉내낼 수 있는 narrow AI(weak AI)와 대조되는 개념.
-비유 : 과거 디지털 카메라의 목표가 필름이 없는 아날로그 카메라를 목표로 잡았듯이 최근 AI의 목표(특히 OpenAI와 Meta)는 AGI이다.
+최근 AI의 목표(특히 OpenAI와 Meta)는 AGI이다.
 정확한 **정의**는 없이 우선 용어와 개념부터 만들고 나중에 정의하려는 분위기다.
 OpenAI의 공식홈페이지에 AGI는 (https://openai.com/charter/) 경제적으로 가치 있는 일에서 인간을 능가하는 높은 자율성을 가진 시스템이라고 정의했다. ('23. 2/24)
 
