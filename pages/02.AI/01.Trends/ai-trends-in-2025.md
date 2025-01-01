@@ -18,7 +18,7 @@ OpenAI의 공식홈페이지에 AGI는 (https://openai.com/charter/) 경제적�
 중요한 뉴스는 아니지만 최신 뉴스라서 잠깐 소개하자면, 위 정의에 "*경제적으로 가치있는 일*"을 수치적으로 정했다고 한다.
 2024년 12월26일에 (The Information(유료 인터넷신문) https://www.theinformation.com/articles/microsoft-and-openais-secret-agi-definition) OpenAI가 최소1000억달러(150조원)의 수익을 낼 때 AGI라고 부를 수 있다고 했다. → 2029년으로 목표.
 
-![](<./_images/Pasted image 20241228192436.png>)
+![center|600](<./_images/Pasted image 20241228192436.png>)
 
 내 생각 : 신문에는 '정의'라고 썼지만 돈 액수로 이 용어를 정의할 수는 없다. 단지 AGI라는 용어를 이용해 그냥 비즈니스 모델을 정의한 것이라 해석하면 될 것 같다.
 
@@ -51,7 +51,7 @@ Andrew Ng의 '24.6/13 LinkedIn 블로그 글 : https://www.linkedin.com/posts/an
 
 > Unlike the noun “agent,” the adjective “agentic” allows us to contemplate such systems and include all of them in this growing movement.
 
-![](<./_images/Pasted image 20241229145838.png>)
+![center|500](<./_images/Pasted image 20241229145838.png>)
 어떤 것이 agentic하다에는 동의를 많이 할 수 있다, we only have different degress of agenticness.
 예시1: 내 이메일들을 보고, 우선 순위를 부여해 To-Do list를 자동으로 생성해주는 것 → agentic하다라고 할 수 있다.
 예시2: 고객센터에서 보고된 프로그램 버그를 '자동'으로 분류해 해당 디버깅 팀 담당자로 보내는 것 → agentic하다.
@@ -80,6 +80,9 @@ CRUD를 해주는 Backend
 Nadella의 말에 의하면 AI tier가 추가되어 4티어 아키텍쳐가 될 것이라고 한다.
 그런데 백엔드에서 담당하던 일들이 점점 AI tier로 그 역할이 넘어가면서 백엔드가 사라질 것이라는 뜻이다.
 
+그럼 Agent는 어떻게 만드는가?
+Anthropic 홈페이지에 입문에 관한 좋은 글이 있다. ('24.12/20 업데이트된 글): https://www.anthropic.com/research/building-effective-agents
+
 ### 3. Multi-modal and Cross-modal
 이미지, 텍스트, 음성, 영상 모두 Input Output 동시에 학습시키고 결과를 낸다.
 ChatGPT-4와 4o의 차이점은 *o*가 *omni* 모델이라는 것의 약자. 즉, 텍스트 뿐 아니라 이미지, 음성 전체(omni)를 뜻한다.
@@ -97,7 +100,7 @@ Google - Gemma → Android에서 돌아가는 AI
 Mustafa Suleyman은 메모리가 2025년 inflection point의 주요 요소가 될 것이라고 했다.
 Mustafa는 우리가 과거 프롬트한 모든 것을 영구적으로 저장해야하고 이를 위해서 무한대 메모리가 필요하다고 올해 발언했다.
 
-### 6. Advanced Inference Model / Inference(추론) compute time
+### 6. Advanced Inference Model / Inference(추론) compute time / Reasoning
 GPT가 3, 4 등 숫자로 내다가 OpenAI o1 (Orion) ('24.9/12)을 내고, o2를 건너뛰고 o3를 ('24.12/21에) 발표하였다. 
 Orion은 fully-automated inference framework으로 추론을 특화한 다른 모델
 o1은 GPT-5에 들어갈 것(아직 예정)으로 Mensa IQ 테스트에서 120이 나왔다고 한다.
@@ -105,6 +108,9 @@ GPT와 가장 큰 차이점은 추론(inference) processing도 있지만 미리 
 이제 LLM의 reasoning을 개발하는 방법이 두 가지 메인스트림이 되었다. 하나는 더 좋은 데이터로 학습을 시키는 방법, 그리고 하나는 inference compute time을 더 주는 방법, 단지 학습뿐 아니라 추론 과정도 학습하도록 만드는 것 → which can lead to smarter AI agents.
 
 Google AI의 Jeff Dean은 '24.12/19에 Gemini 2.0 Flash Thinking을 발표하였다 → 생각하는 과정을 보여준다.
+
+#### GPUs
+pre-training에는 GPU가 국룰이지만, 이 추론 알고리즘에는 (아직도 GPU가 가장 낫지만) 새로운 chip이 더 효율적이라는 분석도 나오고 있다. Nvidia GPU보다 추론에 최적화된 칩이 나온다면 GPU시장도 새로운 경쟁이 시작될 것이다.
 
 ### 7. Very Large LLM
 LLAMA 3.1이 0.405조개, GPT-4가 1.76조개의 매개변수로 학습. 다음 세대 LLM은 약 50조 매개변수를 계획한다는 썰도 있다.
@@ -116,11 +122,22 @@ LLAMA 3.1이 0.405조개, GPT-4가 1.76조개의 매개변수로 학습. 다음 
 ### 9. Domain Specific Models / Industry Specific Models
 단지 매개변수가 크냐 적냐의 문제가 아닌, 한 분야에 특화된 모델을 내는 것도 검토 중. 사실상 AI Agent와 비슷한 개념이기도 하다.
 
-### 10. LCM(Large Concept Models)
+### 10. Foundation Model + methodology/frameworks
+위 7,8,9번과 연관된 개념이긴 하지만 좀 더 자세히 보자면 다음과 같은 뉴스도 있다.
+
+#### LCM(Large Concept Models)
 LLM은 원초적인 단계에서는 결국 tokenization을 통해 다음 단어를 예측하는 모델이다. → 어떻게 보면 advanced auto-complete model, 또 다르게 보자면 'next-token prediction model'이라고 할 수 있다. 
 기본 태생이 이렇기 때문에 이런 모델로 개념에 기반한 인간의 논리적인 사고를 하기 어렵다는 얘기가 있다.
 이와 비교해 LCM은 'next-concept prediction model'이다. (https://ai.meta.com/research/publications/large-concept-models-language-modeling-in-a-sentence-representation-space/)
 (https://github.com/facebookresearch/large_concept_model)
+
+#### DeepSeek V3
+최근('24.12/30) 오픈소스로 중국에서 개발한 DeepSeek V3가 일부 벤치마크 점수에서 앞섰다고 한다. H100보다 낮은 H800으로 약$5.5million(약 80억원 - LLAMA3.1 405b의 약 1/11수준)으로 이룬 결과이다. 이는 오픈소스 Foundation Model과 새로운 methodology로 더 좋은 결과를 낼 여지가 있는 것을 시사한다. 
+
+#### KAG(Knowledge Augmented Generation), RemoteRAG
+RAG system의 단점(벡터유사성과 knowledge의 갭에서 hallucination)을 보완해줄 후보인 KAG가 논문으로 발표되었다. 또한 민감한 data의 privacy leakage를 막아줄 RemoteRAG 방식에 대한 논문도 발표되었다.
+CoT(Chain-of-thought), zero-shot / few-shot prompting도 있다.
+Meta+MS의 RAFT: https://ai.meta.com/blog/raft-llama-retrieval-augmented-generation-supervised-fine-tuning-microsoft/
 
 ### 11. Humanoids(휴머노이드)
 테슬라의 옵티머스2 발표 - 과거처럼 알고리즘을 짤 필요가 없다. 공장에 노동자로 투입 가능 시점 당겨진다. 
@@ -128,7 +145,15 @@ LLM은 원초적인 단계에서는 결국 tokenization을 통해 다음 단어�
 
 ### 12. More use-cases of AI
 2024년에는 customer UX 발전, 자동화, virtual assistants, 사이버 보안에도 기여하였다.
+E-commerce에서는 초개인화에 대한 use cases도 더 발전되는 추세이다.
+#### Hardware
 아마존의 새로운 Alexa가 Claude AI를 사용하고 'Remarkable Alexa'라는 이름으로 출시할 것이라 8월에 발표했지만 아직 소식은 없다.
+#### Ilya Sutskever
+OpenAI의 co-founder이고 chief scientist가 올해 퇴사하고 독립 회사를 설립하였다. 이미 $1bn 투자를 받을 것으로 예상됨.
+#### Mira Murati
+OpenAI의 CTO도 퇴사하고 벤처를 설립하였다. $100miliion를 투자받을 것으로 예상된다.
+![center|400](<./_images/Pasted image 20250101125926.png>)
+
 
 ### 13. 변곡점 (inflection point)
 아무도 키워드로 뽑지 않지만, 그냥 내가 키워드로 뽑았다.
