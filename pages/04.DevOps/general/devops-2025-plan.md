@@ -9,22 +9,21 @@ date: 2025-01-01
   
 ### 2. Multi-Cloud DevOps / SA와 인프라 업무
 AWS, Azure 공부
+#### Redis PaaS
+- AWS Elasticache for Redis / Memcached
+- Azure Cache for Redis 
+→ 근본적인 대책은 아니지만 가격이 비싸지 않다.(설치해서 쓰는 것과 비슷)
 #### SK렌터카
 Azure / DevOps
 #### Rolling update시 404 error 해결 후보들
 금천미트에서 해결하지 않은 것
-##### 1. PV(Persistent Volumes)
-- store any pod-specific state data in PV that are mounted to pods → pod 재시작시 state가 유지
-- create PVC(Persistent Volumes Claims) 
-- AWS EBS, Azure Disk(Azure Files)
-##### 2. Redis PaaS
-- AWS Elasticache for Redis / Memcached
-- Azure Cache for Redis 
-→ 근본적인 대책은 아니지만 가격이 비싸지 않다.(설치해서 쓰는 것과 비슷)
+##### 1. Blue/Green Canary deployments
+
+#### 2. Serve static assets from an external CDN (or external storage)
+
 ##### 3. Layer 7 LB (Load Balancer)
 - AWS ALB, Azure Application Gateway와 session stickiness 기능
-##### 4. StorageClass
-AWS S3나 Azure Storage Account에 저장
+
 
 ### 3. Serverless Architecture
 AWS Lambda, serverless Aurora 등, 기존 infrastructure overhead를 줄일 수 있다.
