@@ -10,9 +10,9 @@ date: 2025-01-01
 ### 2. Multi-Cloud DevOps / SA와 인프라 업무
 AWS, Azure 공부
 #### Redis PaaS
+VM에 docker container로 올리는 대신 다음 PaaS로 변경 (가격이 비슷함)
 - AWS Elasticache for Redis / Memcached
 - Azure Cache for Redis 
-→ 근본적인 대책은 아니지만 가격이 비싸지 않다.(설치해서 쓰는 것과 비슷)
 #### SK렌터카
 Azure / DevOps
 #### Rolling update시 404 error 해결 후보들

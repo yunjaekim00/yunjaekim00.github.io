@@ -1,7 +1,7 @@
 ---
-title: 25.01.18 AI와 software 개발
+title: 25.01.18 GenAI와 software 개발
 date: 2025-01-18
 ---
-### AI 시대
+### 생성형 AI 시대
 
 
