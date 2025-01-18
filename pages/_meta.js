@@ -8,6 +8,10 @@ export default {
       layout: "full",
     },
   },
+  "01.Thoughts": {
+    title: "나의 생각",
+    type: "page",
+  },
   "02.AI": {
     title: "AI",
     type: "page",

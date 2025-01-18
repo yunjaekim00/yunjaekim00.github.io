@@ -1,7 +1,7 @@
 export default {
-	IT: {
-		title: "IT",
-	},
+	//IT: {
+	//	title: "IT",
+	//},
 	etc: {
 		title: "etc",
 	},
