@@ -1,6 +1,6 @@
 # next.js
 /.next/
-.github/
+#.github/
 
 # dependencies
 /node_modules
@@ -17,5 +17,4 @@ assets/
 .trash/
 
 # Mac
-.DS_Store
 .DS_Store

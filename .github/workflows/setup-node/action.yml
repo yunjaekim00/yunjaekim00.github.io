@@ -1,0 +1,22 @@
+name: setup-node
+description: "Setup Node.js and install dependencies"
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 20
+
+    - name: Check for pnpm
+      shell: bash
+      run: |
+        if ! command -v pnpm > /dev/null; then
+          npm install -g pnpm
+        else
+          echo "pnpm is already installed"
+        fi
+
+    - name: Install dependencies
+      shell: bash
+      run: pnpm install
