@@ -89,7 +89,7 @@ output: 'export'는 Github Actions에서 정적인 파일 놓을 위치 지정�
 
 `theme.config.jsx`생성  
 블로그 글 오른쪽에  
-![](./_images/20240911202512.png)
+![](<./_images/20240911202512.png>)
 이런 것들은 지우고 싶으면 다음과 같은 코드 추가.  
 그리고 마지막 업데이트 날짜도 글에 나오게 하고 싶으면 코드 추가.
 
@@ -230,7 +230,7 @@ date: "2024-08-05"
 ```
 
 `title`이라는 front matter는 아래처럼 사이드바에 보여지는 제목만을 변경해준다.  
-![](./_images/20240914185441.png)
+![](<./_images/20240914185441.png>)
 
 `pages/_meta.json`생성 → Sidebar 순서
 
@@ -301,6 +301,52 @@ runs:
 ```
 
 `publish.yml`파일
+```yaml
+name: publish-to-github-pages
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js and install dependencies
+        uses: ./.github/workflows/setup-node
+
+      - name: Build with React
+        run: pnpm build
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out # This is the static output directory
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Publish to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+```
 
 ```sh
 git add .
