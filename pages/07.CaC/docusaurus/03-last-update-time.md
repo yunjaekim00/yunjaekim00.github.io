@@ -6,7 +6,7 @@ date: "2024-08-05"
 # last update time 넣기
 여기 글 맨 아래 오른쪽으로 보면  
  
-![](./_images/Pasted%20image%2020240806225329.png)  
+![](<./_images/Pasted image 20240806225329.png>)  
 
 위와 같이 나온다. 이를 위해 해줘야할 configuration은 다음과 같다.  
 공식 문서 : https://docusaurus.io/docs/api/plugins/@docusaurus/plugin-content-docs#showLastUpdateTime  

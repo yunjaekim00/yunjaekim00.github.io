@@ -1,6 +1,6 @@
 # next.js
 /.next/
-.github/
+#.github/
 
 # dependencies
 /node_modules

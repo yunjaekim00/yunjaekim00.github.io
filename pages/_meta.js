@@ -20,15 +20,19 @@ export default {
     title: "FrontEnd",
     type: "page",
   },
-  "04.DevOps": {
+  "04.BackEnd": {
+    title: "BackEnd",
+    type: "page",
+  },
+  "05.DevOps": {
     title: "DevOps",
     type: "page",
   },
-  "05.Infra": {
+  "06.Infra": {
     title: "Infra",
     type: "page",
   },
-  "06.CaC": {
+  "07.CaC": {
     title: "CaC",
     type: "page",
   },
