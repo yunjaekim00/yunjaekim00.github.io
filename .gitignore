@@ -12,9 +12,9 @@ yarn.lock
 /out/
 
 # obsidian
-assets/
-.obsidian/
-.trash/
+pages/assets/**
+pages/.obsidian/**
+pages/.trash/**
 
 # Mac
 .DS_Store
