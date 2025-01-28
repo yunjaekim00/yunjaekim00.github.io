@@ -62,7 +62,8 @@ rustc 1.84.0 (9fc6b4312 2025-01-07)
 
 ## VS code extension
 VS code에서 필요한 extension은 딱 하나
-![500](Pasted%20image%2020250128131806.png)
+![500](./_images/Pasted%20image%2020250128131806.png)
+
 #### **Shell command** 설치
 이건 VS code 설치하면서 자동으로 되는 경우도 있는 것 같은데
 옆에 이번에 맥미니 사신 분을 보니 자동으로 설치가 안 된 것 같다.
@@ -70,4 +71,4 @@ VS code에서 필요한 extension은 딱 하나
 
 VS code에서 `Cmd` + `Shift` + `P`를 누르면 command palette이 나오고
 여기에 다음을 검색해서 클릭하면 하면 설치된다.
-![600](Pasted%20image%2020250128153944.png)
+![600](./_images/Pasted%20image%2020250128153944.png)
