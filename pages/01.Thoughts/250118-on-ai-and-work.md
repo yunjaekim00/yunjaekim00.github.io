@@ -4,4 +4,4 @@ date: 2025-01-18
 ---
 ### 생성형 AI 시대
 
-
+to be continued ...

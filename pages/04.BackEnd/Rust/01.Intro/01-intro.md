@@ -72,3 +72,25 @@ VS code에서 필요한 extension은 딱 하나
 VS code에서 `Cmd` + `Shift` + `P`를 누르면 command palette이 나오고
 여기에 다음을 검색해서 클릭하면 하면 설치된다.
 ![600](./_images/Pasted%20image%2020250128153944.png)
+
+## Rustup
+- **rustup** 은 CLI command로 동작하는 utility tool이다.
+- `rustup`으로 할 수 있는 것은 다음과 같다.
+
+#### version update
+```sh
+> rustup update
+```
+
+#### uninstall
+```sh
+> rustup self uninstall
+```
+
+#### documentation 보기
+```sh
+> rustup doc
+```
+
+을 하게되면 local에 저장되어있는 Rust documentation 내용의 index.html을 하나 브라우저에 띄운다.
+이 페이지의 본문에 `The Rust PRogramming Language`라는 링크를 클릭하면 Rust 언어 가이드가 나온다.
