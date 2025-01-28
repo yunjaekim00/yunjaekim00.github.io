@@ -10,17 +10,11 @@
 /*@import url("https://webfontworld.github.io/kyobobook/KyoboHandwriting2019.css");*/
 
 @font-face {
-  font-family: "KyoboHandwriting2019";
-  src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot");
-  src: url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.eot?#iefix")
-      format("embedded-opentype"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.woff2")
-      format("woff2"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.woff")
-      format("woff"),
-    url("https://cdn.jsdelivr.net/gh/webfontworld/kyobobook/KyoboHandwriting2019.ttf")
-      format("truetype");
-  font-display: swap;
+  font-family: "KyoboHand";
+  src: url("https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_20-04@1.0/KyoboHand.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
 :root {
@@ -32,7 +26,7 @@
 }
 
 body {
-  font-family: "Comic Neue", "KyoboHandwriting2019", sans-serif;
+  font-family: "Comic Neue", "KyoboHand", sans-serif;
 }
 
 /* 일반 텍스트 스타일 */
@@ -50,7 +44,7 @@ body {
 /* inline code 스타일 */
 .nextra-content p code,
 .nextra-content li code {
-  font-family: "Comic Neue", "KyoboHandwriting2019";
+  font-family: "Comic Neue", "KyoboHand";
   font-size: 1.125rem;
   font-weight: bold;
   letter-spacing: 0.03rem;
