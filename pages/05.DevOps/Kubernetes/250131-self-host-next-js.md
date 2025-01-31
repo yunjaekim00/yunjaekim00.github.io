@@ -16,7 +16,7 @@ cssclasses:
 강조하고 싶은 것은, 이 문제는 방금 위에서 말한 배포 전략과 관련은 있지만 다른 이야기다.
 밑에 더 자세히 설명하겠지만, 이는 FO의 정적 파일을 storage (CDN 혹은 다른 외부저장소)에서 제공해주어야하기 때문이다.
 
-## Rolling Update
+## 1. Rolling Update
 Rolling update는 health check를 마친 pod를 하나씩 생성하면서 기존의 pod를 하나씩 소멸시키는 방법이다.
 이 방법의 장점 : 시스템을 무중단으로 업데이트 할 수 있다.
 이 방법의 단점 : 새 버전의 pod들로 트래픽이 이전되기 전까지 이전 버전과 새 버전의 pod가 동시에 존재할 수 있다.
@@ -35,7 +35,7 @@ Rolling update는 health check를 마친 pod를 하나씩 생성하면서 기존
 
 즉, Rolling update는 3가지 health check를 마친 신규 pod가 생성되고나서, 기존 pod 하나가 제거된다.
 
-## Next.js static files
+## 2. Next.js static files
 ### npm build
 Next.js application에서 
 ```sh
@@ -55,7 +55,7 @@ Next.js application에서
 ![](./_images/Pasted%20image%2020250131135721.png)
 소스 코드 수정이 없어도 다시 `npm run build`를 하게 되면 이 hashed 파일명은 또 바뀌게 된다. (hash를 위해 build timestamp도 쓰이기 때문)
 #### 파일명 해시의 이유
-- 브라우저는 기본적으로 사용자에게 성능을 보강하기 위함
+- 브라우저는 기본적으로 사용자에게 성능을 보강하기 위하여 pre-rendering된 `.js` `.css` 파일을 브라우저에 저장하기 위해 서버에 요청한다.
 - 이 파일명이 만약 바뀌지 않는다면 브라우저는 캐시가 된 stale version의 파일들을 사용할 수 있으므로 대부분 frontend framework에서 취하는 전략이다. 다시 빌드가 될 때 새로운 업데이트된 최신 파일들의 fetch를 보장하는 프레임워크의 전략이다.
 #### `_next`
 - `npm run build`를 하면 `.next`라는 폴더가 생기지만, 이것을 *browser*가 액세스할 때는 `_next`라는 virtual public-facing URL로 접근하도록 Next.js의 라우팅 메카니즘이 정해져있다.
