@@ -1,5 +1,5 @@
 ---
-title: Introduction to Rust
+title: 1. Introduction to Rust
 date: 2025-01-27
 ---
 ## Introduction to Rust

@@ -70,3 +70,6 @@ https://www.reuters.com/technology/cybersecurity/bt-spots-2000-potential-attacks
 Unlike a centralized environment, Edge Computing distributes processing and data collection across various points at the network’s edge, reducing latency and, consequently, increasing efficiency.
 Distributed Cloud(중앙+edge) > Edge > CDN
 CDN에서 확장 개념 - 동적 real-time processing. ioT 환경에서 우선 도입 중.
+
+### 10. gRPC
+REST API vs. gRPC vs. GraphQL의 아키텍쳐 스타일 공부
