@@ -42,7 +42,7 @@ Next.js application에서
 > npm run build
 ```
 를 하게 되면 아래 그림처럼 `.next` 폴더가 생기게 된다.
-![](_images/Pasted%20image%2020250131132814.png)
+![](./_images/Pasted%20image%2020250131132814.png)
 1. SSG를 위한 pre-rendered HTML
 2. ISR을 위한 동적으로 재생성되는 HTML 파일들
 3. SSR를 위해 pre-compile된 번들
@@ -52,7 +52,7 @@ Next.js application에서
 6. 정적 파일들 : `.css` 파일, `.js` chunks, 그리고 이미지 파일들이 최적화 되어 `.next/static` 폴더에 저장된다. (public 폴더에 있는 것도 원래는 여기 저장된다.)
 ### hashed file names
 이 `.next/static` 폴더 안을 보면 파일 이름들이 전부 hashed 되어있다.
-![](_images/Pasted%20image%2020250131135721.png)
+![](./_images/Pasted%20image%2020250131135721.png)
 소스 코드 수정이 없어도 다시 `npm run build`를 하게 되면 이 hashed 파일명은 또 바뀌게 된다. (hash를 위해 build timestamp도 쓰이기 때문)
 #### 파일명 해시의 이유
 - 브라우저는 기본적으로 사용자에게 성능을 보강하기 위함
@@ -61,7 +61,7 @@ Next.js application에서
 - `npm run build`를 하면 `.next`라는 폴더가 생기지만, 이것을 *browser*가 액세스할 때는 `_next`라는 virtual public-facing URL로 접근하도록 Next.js의 라우팅 메카니즘이 정해져있다.
 - 즉 browser가 `_next/`로 요청을 하면 서버는 `.next`로 응답한다.
 ### 문제점
-![center](_images/2025-01-31_static_rolling.excalidraw.svg)
+![center](./_images/2025-01-31_static_rolling.excalidraw.svg)
 1. AS-IS pod가 2개라고 가정할 때, (Rolling Update를 위해 MaxSurge를 50%로 설정하면) 신규 pod가 한 개씩 교체가 된다. 
 2. 이렇게 신규 배포가 하나씩 생성될 때 기존 pod와 신규 pod가 동시에 존재하는 시간이 생김.
 3. 이미 로그인하고 있던 사용자는 브라우저에서는 새로운 페이지로 이동시 서버에 `aaaa.js`와 `bbbb.css`를 요청
