@@ -14,9 +14,12 @@ date: 2025-01-27
 ## Installing XCode on Mac
 난 맥북만 쓰니깐 맥북 설치만 쓴다.
 ### XCode command line tools
-- Rust compiler는 또 하나의 소프트웨어를 이용해서 실행된다 → 이를 dependency라고 부른다.
 - Rust를 설치하기 전에 **XCode command line tools**라는 dependency를 설치해야한다.
-- **Xcode**(Xcode.app)는 Mac에서 앱 개발하는 텍스트 데이터같은 것인데 지금 설치할 *XCode command line tools*는 같은 것은 아니고 Xcode 부분 집합 격인데 다른 언어 설치할 때도 필요하다.
+- **Xcode**(Xcode.app)는 Mac에서 앱 개발하는 text editor 같은 것인데 지금 설치할 *XCode command line tools*는 (Xcode와 같은 것은 아니고) Xcode 부분 집합 격인데 다른 언어 설치할 때도 필요하다.
+
+- 좀 더 구체적으로 묘사하면 → **C compiler**는 C로 짠 소스코드를 *object file*(binary files containing machine code)로 변환해준다 → 그러나 이 파일은 *executable* 하지 않다.
+- **linker**는 이 object file들을 합쳐서 **executable**로 바꿔준다.
+- Rust는 **linker**라고 불리는 프로그램이 필요하다. → Rust의 package에는 C/C++ code에 의존하는 것들이 많다 → `xcode-select`는 Xcocde command line tool로서 C compiler와 linker가 포함되어있다.
 
 설치 되어있는지 확인
 

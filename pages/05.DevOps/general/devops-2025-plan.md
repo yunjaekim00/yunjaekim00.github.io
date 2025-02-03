@@ -27,6 +27,7 @@ Azure / DevOps
 
 ### 3. Serverless Architecture
 AWS Lambda, serverless Aurora 등, 기존 infrastructure overhead를 줄일 수 있다.
+AWS Fargate를 이용한 AWS EKS 구축
 
 ### 4. Python
 for automation such as AWS Lambda - gitOps에 여러 부분을 자동화
