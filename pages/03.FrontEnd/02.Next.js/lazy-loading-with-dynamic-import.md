@@ -1,7 +1,8 @@
 ---
-title: lazy-loading-with-dynamic-import
+title: lazy loading with dynamic import
 date: 2025-02-13
 ---
+# Lazy loading with dynamic import
 ## Next.js page
 아래는 `app/page.tsx`의 코드이다.
 
@@ -9,8 +10,9 @@ date: 2025-02-13
 - useState의 초기값을 `false`로 놓아,
 - `PopupListModal` component가 렌더링되지 않게 해놓았다.
 
-이 component는 실제로 여러가지 성격의 component일 수 있다.
-웹사이트를 이용하는 모든 사람들이 꼭 보지 않아도 되는, 클릭해서 원할 때만 봐도 되는 component라고 보면 된다.
+간단한 예를 들었지만 이 component는 실제 application에서는,
+웹사이트를 이용하는 모든 사람들이 꼭 보지 않아도 되는,
+원하는 사람만 클릭해서 봐도 되는 component라고 보면 된다.
 
 ```tsx
 'use client'
@@ -36,12 +38,14 @@ export default Home
 ![](./_images/Pasted%20image%2020250213152253.png)
 1.4Mb의 용량을 가져오는 것을 볼 수 있다.
 이는 렌더링이 되지 않음에도 불구하고 `import`로 가져오는 것이다.
-당장 main page에 필요하지 않는 component를 import해와서 초기 로딩 속도가 느려진다.
+당장 main page에 필요하지 않는 component를 import해와서 초기 로딩 속도가 느려지는 결과를 낳는 것이다.
 
-위와 똑같은 기능의 `page.tsx`이지만 다음 코드를 보자.
+위와 완벽히 똑같은 기능의 `page.tsx`이지만 다음 코드를 보자.
 
 ## Dynamic Import
 `app/page.tsx`를 다음과 같이 수정한다.
+직접 `PopupListModal` component를 import하지 않고 dynamic import를 이용하였다.
+
 ```tsx
 'use client'
 
