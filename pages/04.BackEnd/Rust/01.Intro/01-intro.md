@@ -1,6 +1,8 @@
 ---
 title: 1. Introduction to Rust
 date: 2025-01-27
+cssclasses:
+  - review2
 ---
 ## Introduction to Rust
 ### What is Rust
