@@ -17,4 +17,7 @@ export default {
 	Terraform: {
 		title: "Terraform",
 	},
+	Ansible: {
+		title: "Ansible",
+	},
 };
