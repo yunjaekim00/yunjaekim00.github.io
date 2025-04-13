@@ -1,5 +1,5 @@
 ---
-title: Next.js app을 cloud에 호스팅 그리고 무중단 배포
+title: Next.js self-host 무중단 배포 - 1
 date: 2025-01-30
 cssclasses:
   - review2
