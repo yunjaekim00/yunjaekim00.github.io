@@ -271,6 +271,7 @@ module.exports = withNextIntl(nextConfig)
         """
 ```
 
+#### Dockerfile
 그리고 `docker/DockerfileForNodePnpm`이라는 파일을 새로 생성하였다.
 ```Dockerfile
 FROM node:lts-alpine3.21
@@ -318,3 +319,206 @@ URL을 생성하여 환경변수를 주입시켰다.
 
 
 ## 3. Jenkins plugin 설치
+#### Jenkins plugin 설치
+Jenkins에서 AWS S3 bucket에 파일을 업로드하기 위해서
+Jenkins를 설치한 Docker container에 AWS CLI를 설치하여 `aws s3`라는 명령어를 pipeline의 stage에 shell script로 적용하는 방법도 있다.
+그러나 이럴 시 문제점은 Terraform도 마찬가지지만 shell script을 넣으면 에러가 나서 실행이 안 되도 다음 단계로 넘어가버리는 문제가 있는데 이것은 다른 글에 더 자세히 설명하기로 하고,
+중요한 것은 다음 Jenkins plugin을 설치하면 pipeline 코드 내에서 `s3Upload`라는 명령어를 사용할 수 있게 된다. 
+그래서 docker container에 AWS CLI를 설치할 필요없이 다음 플러그인을 설치한다.
+![](./_images/Pasted%20image%2020250414123951.png)
+그리고 추가로 다음 플러그인을 설치해주면 AWS access key를 Jenkins 내에 저장할 수 있다.
+![](./_images/Pasted%20image%2020250414123526.png)
+#### AWS Credentials 등록
+위 두 플러그인을 설치하고 `Jenkins관리 > Credentials`를 가면 다음과 같이 AWS Credentials를 저장할 수 있는 메뉴가 drop down 메뉴에 생긴다.
+
+![](./_images/Pasted%20image%2020250414124215.png)
+pipeline code에서 사용해야하니 생성하고 `id` 이름을 잘 기억해둔다.
+다시 pipeline code로 돌아온다.
+
+## 4. S3로 upload
+#### pipeline code for S3 upload
+`pipeline/pipline.groovy` 522번째 line에 다음 코드를 추가하였다.
+
+```groovy ln:522
+    if (ENABLE_S3_UPLOAD_YN == "Y") {
+        this.extractNext()
+        this.uploadToS3()
+        this.cleanupOldStaticFiles()
+    }
+```
+
+세 가지 함수를 만들 것이다.
+
+**1. extractNext()**
+Dockerfile로 말아서 Nexus에서 올린 image 파일에서 정적 파일(static file)을 추출해서 임시의 workspace에 저장해주는 일을 할 것이다.
+**2. uploadToS3()**
+추출해 낸 정적인 파일을 Build Number에 해당하는 폴더에 업로드할 함수이다.
+**3. cleanupOldStaticFiles()**
+전전 (N-2번째 빌드)에서 S3에 업로드한 폴더를 삭제해 줄 함수이다.
+
+**1. extractNext()**
+각각의 코드를 보자면, pipline.groovy의 322번째 줄에 추가하였다.
+```groovy
+def extractNext(){
+    stage('Extract .next Folder') {
+        script {
+            sh """#!/bin/bash
+                rm -rf /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}
+                rm -rf /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}@tmp
+                mkdir -p /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static
+                chmod -R 777 /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}
+            """
+
+            sh """
+                if docker ps -a --format '{{.Names}}' | grep -q '^${APP_NAME}-temp-container-${PRJ_TARGET}\$'; then
+                    echo "Removing existing container '${APP_NAME}-temp-container-${PRJ_TARGET}'"
+                    docker rm -f ${APP_NAME}-temp-container-${PRJ_TARGET}
+                fi
+
+                docker create --name ${APP_NAME}-temp-container-${PRJ_TARGET} ${DOCKER_IMAGE_NAME}:latest
+                # docker cp ${APP_NAME}-temp-container-${PRJ_TARGET}:/app/public /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/
+                docker cp ${APP_NAME}-temp-container-${PRJ_TARGET}:/app/.next/static /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/
+
+                if [ -d "/var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static" ]; then
+                    echo "Copy completed, checking files..."
+                    until [ \$(ls -1 /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static | wc -l) -gt 0 ]; do
+                        echo "Waiting for files to be available in /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static..."
+                        sleep 1
+                    done
+                    echo "Files are now available in /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static"
+                else
+                    echo "Directory /var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static does not exist!"
+                    exit 1
+                fi
+            """
+        }
+    }
+}
+```
+
+코드를 보면 docker image에서 임시의 container를 만들고, 정적인 파일을 추출하여, `jenkins_home`에 임시의 폴더를 만들어서 저장한다.
+
+**2. uploadToS3()**
+다음 코드를 만들기 전에 코드의 확장성을 위해
+`scm_scripts/moonstore-net-fo-vanilla.properties`에 다음 변수를 선언해준다.
+```
+# Object Storage Repository Setting
+S3_SOURCE_DIRS          = ./static
+S3_BUCKET_NAME_DEV      = static-s3-bucket
+S3_KEY_DEV              = /_next/static
+```
+(위에서 S3_KEY는 키가 아니고 destination folder 명인데 이름을 조금 잘못 지었다)
+
+위 변수들은 `pipeline/Jenkinsfile`에서 `_DEV`라는 이름을 다음 코드로 떼게 된다.
+```
+        stage('Prepare') {
+            steps{
+                script {
+                    switch("${PRJ_TARGET}"){
+                        case "dev":
+                            JAVA_OPS                = "${JAVA_OPS_DEV}"
+                            GIT_BRANCH              = "${params.BRANCH}"
+                            S3_BUCKET_NAME          = "${S3_BUCKET_NAME_DEV}"
+                            S3_PROFILE              = "${S3_PROFILE_DEV}"
+                            S3_KEY                  = "${S3_KEY_DEV}"
+```
+
+이제 pipeline.groovy코드의 358번째 line에 추가하였다.
+```groovy
+
+def uploadToS3() {
+    stage('Upload Static Files To S3') {
+        script {
+            // Create a deployment-specific folder using the Jenkins BUILD_NUMBER
+            def deploymentFolder = "static/${env.BUILD_NUMBER}${S3_KEY}"  
+            s3Upload(
+                bucket: "${S3_BUCKET_NAME}",
+                path: deploymentFolder,
+                workingDir: "/var/jenkins_home/mnt/${APP_NAME}-next-${PRJ_TARGET}/_next/static",
+                includePathPattern: '**/*' 
+            ) 
+        }
+    }
+}
+```
+Jenkins item의 build number를 이용해 그 폴더에 업로드 해준다.
+위에서 얘기한 것처럼 AWS CLI를 설치한 것이 아니라 plugin을 설치했기 때문에 `aws s3 sync`라는 명령어는 먹히지 않고, Jenkins 고유의 플러그인인 `S3Uploader`의 고유의 syntax인 `s3Upload`라는 명령어를 사용한다.
+
+**3. cleanupOldStaticFiles()**
+이제 전전벌드의 폴더를 S3에서 삭제해준다.
+```groovy
+def cleanupOldStaticFiles() {
+    stage('Cleanup Old Static Files') {
+        script {
+            // Step 1: List objects in the S3 bucket to find deployment folders
+            def s3Objects = s3FindFiles(
+                bucket: "${S3_BUCKET_NAME}",
+                path: "static/",
+                onlyDirectories: true
+            )
+            
+            // Step 2: Extract folder names and sort them
+            def folders = []
+            s3Objects.each { item ->
+                // Extract the folder name (build number) from the path
+                def folderName = item.name.replaceAll('static/', '').replaceAll('/', '')
+                if (folderName) {
+                    folders.add(folderName)
+                }
+            }
+            
+            // Step 3: Sort folders numerically (assuming they are build numbers)
+            folders.sort { a, b -> 
+                try {
+                    return Integer.parseInt(a) <=> Integer.parseInt(b)
+                } catch (NumberFormatException e) {
+                    // Fallback to string comparison if not numeric
+                    return a <=> b
+                }
+            }
+            
+            // Step 4: Keep only the oldest folders (all except the 2 most recent)
+            def foldersToDelete = []
+            if (folders.size() > 2) {
+                foldersToDelete = folders[0..(folders.size() - 3)]
+            }
+            
+            echo "Found deployment folders: ${folders.join(', ')}"
+            echo "Folders to delete: ${foldersToDelete.join(', ')}"
+            
+            // Step 5: Delete each old folder
+            foldersToDelete.each { folder ->
+                echo "Deleting static/${folder}/"
+                s3Delete(
+                    bucket: "${S3_BUCKET_NAME}",
+                    path: "static/${folder}/",
+                    recursive: true
+                )
+            }
+        }
+    }
+}
+```
+
+
+#### helm chart
+간과하기 쉬운 것인데, docker container로 뜨는 것이 아니라 K8s pod로 뜨는 것이기 때문에 K8s pod에도 URL을 주입시켜주어야한다.
+다음 코드는 `char/stable/templates/deployment.yaml`파일인데, **다음 코드는 Jenkins에서 실행되는 것이 아니라, ArgoCD에서 실행되는 것이다.** 
+그러므로 `${env.BUILD_NUMBER}`가 먹히지 않는다.
+대신 ArgoCD는 Jenkins와 이 build number를 공유하고, 이 번호는 `build_number`에 저장되게 된다.
+즉, `char/stable/templates/deployment.yaml` 이 파일에 다음 코드를 추가한다. (line 44)
+
+```yaml
+            {{ if eq .Values.application.name "moonstore-next-fo-vanilla" }}
+            - name: NEXT_ASSET_PREFIX
+              value: "https://cdn-fo.x2bee.com/{{ .Values.application.build_number }}"
+            {{ end }}
+```
+
+이제 모든 준비가 끝났다.
+
+## 검증
+`dev-values.yaml`에 min pod를 최소 2보다 크게하고
+ArgoCD에 기존 pod와 신규 pod가 공존할 때 새로고침을 해서 에러가 발생하는지 확인한다.
+
+![](./_images/Pasted%20image%2020250414131251.png)
