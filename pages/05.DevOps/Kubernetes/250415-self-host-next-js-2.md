@@ -60,7 +60,7 @@ WAF 메뉴에서 아무거나 선택 가능하지만 첫번째 `Enable security 
 #### Update S3 policy
 CloudFront distribution이 생성된 후 클릭하고
 위에 탭 중 Origins → Edit를 클릭하면
-![](./_images/Pasted%20image%2020250414102903.png)
+![500](./_images/Pasted%20image%2020250414102903.png)
 중간에 다음 버튼이 보인다.
 여기서 Copy policy를 클릭하고
 ![250](./_images/Pasted%20image%2020250414102949.png)
@@ -145,5 +145,176 @@ Alias를 선택하고, `Alias to CloudFront distribution`을 선택하고 설정
 3. ArgoCD(K8s pod)가 어떤 폴더를 봐야하는지
 이 세 가지를 다 약속을 해서 통일해줘야 가능한 일이다.
 
+그래서 통일을 시켜주어서 배포하였다. 방법은 아래 정리하겠다.
+
+#### pipeline code 수정
+우리가 사용하는 pipeline 코드에서 다른 application에는 영향을 주지 않기 위해 우선 `scm_scripts/moonstore-next-fo-vanilla.properties`파일을 수정해두자
+
+```
+# -----------------------------------
+ENABLE_S3_UPLOAD_YN         = Y
+ENABLE_S3_CACHE_YN          = N
+ENABLE_BUILD_YN             = N
+ENABLE_DOCKER_YN            = N
+ENABLE_DOCKER_NODE_YN       = N
+ENABLE_DOCKER_NUXT_YN       = N
+ENABLE_DOCKER_NODE_PNPM_YN  = Y
+ENABLE_DEPLOY_YN            = Y
+# -----------------------------------
+```
+
+위에는 전부 수동으로 설정한 변수로 Dockerfile 다른 것을 쓰기 위해 위에처럼 설정해놓았다.
+
+`pipeline/pipline.groovy`파일의 516번째 line에 아래 코드 추가해주었다.
+```groovy
+    } else if (ENABLE_DOCKER_NODE_PNPM_YN == "Y") {
+        this.buildDockerNext()
+```
+
+그리고 265번째 line에 다음을 추가하였다.
+```groovy ln:265
+def buildDockerNext() {
+    stage('Docker Image') {
+        dir("project") {
+            retry(3) {
+                def img = docker.build(
+                    "${DOCKER_IMAGE_NAME}:latest",
+                    "-f \"Dockerfile\" . \
+                    --build-arg NEXT_BUILD_NUM=${env.BUILD_NUMBER} \
+                    --build-arg BUILD_PROFILE=${BUILD_PROFILE} \
+                    --build-arg START_PROFILE=${START_PROFILE} \
+                    "
+                )
+                docker.withRegistry("${DOCKER_REPO_URL}", "${DOCKER_REPO_CREDENTIALS_ID}") {
+                    retry(5) {
+                        try{
+                            img.push("latest")
+                        } catch (e) {
+                            sleep(10)
+                            throw e
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+```
+
+일반 FO에서 쓰던 코드 대비 딱 한 줄이 추가되었다.
+
+```
+		--build-arg NEXT_BUILD_NUM=${env.BUILD_NUMBER} \
+```
+
+코드의 다른 곳에 아무데도 `BUILD_NUMBER`라는 변수를 선언해주지 않았다. Jenkins의 고유 syntax로 저렇게 `${env.BUILD_NUMBER}`이것만 사용해주면 Jenkins 현재 Item에서 사용되는 현재 build number를 가져온다. 이것을 Dockerfile에 인자로 전달해주는 것이다.
+
+#### Next.js 코드 수정
+Next.js code를 git clone한 후에
+테스트하기 위한 새로운 feature branch를 하나 딴다.
+
+`next.config.js` 파일에 33번째 line에 다음 코드를 추가
+```js
+const cdnUrlforStatic = 'cdn-fo.x2bee.com'
+```
+
+61번째 line부터 전부 `${cdnUrlforStatic}`을 추가하였다.
+```js
+const contentSecurityPolicy = `
+  default-src 'self';
+  script-src 'self' ${cdnUrlforStatic} 'unsafe-inline' 'unsafe-eval' blob: repo.whatap-browser-agent.io/rum/prod/ static.nid.naver.com developers.kakao.com  appleid.cdn-apple.com t1.daumcdn.net t1.kakaocdn.net stdpay.inicis.com stdux.inicis.com nice.checkplus.co.kr umami.x2bee.com js.tosspayments.com;
+  connect-src 'self' rum-ap-northeast-2.whatap-browser-agent.io nice.checkplus.co.kr umami.x2bee.com event.tosspayments.com apigw-sandbox.tosspayments.com apigw.tosspayments.com google-analytics.com overbridgenet.com;
+  style-src 'self' ${cdnUrlforStatic} 'unsafe-inline' stdpay.inicis.com;
+  font-src ${cdnUrlforStatic} 'self' data:;
+  worker-src 'self' ${cdnUrlforStatic} blob:;
+  img-src ${cdnUrlforStatic} ${imgSrcPolicy}
+  media-src ${cdnUrlforStatic} ${mediaSrcPolicy}
+  frame-src ${cdnUrlforStatic} ${frameSrcPolicy}
+  frame-ancestors ${cdnUrlforStatic} ${frameAncestorsPolicy}
+  form-action 'self' stdpay.inicis.com nice.checkplus.co.kr mobile.inicis.com inilite.inicis.com  sharer.kakao.com accounts.kakao.com;
+`
+```
+
+(물론 refactoring의 여지는 남아있지만 일단 추가)
+위 코드는 외부 도메인에서 파일을 가져오는 것을 허용해주기 위해서 CSP(Content Security Policy)를 설정하는 것으로 Next.js에서 꼭 필요하다.
+
+그리고 `next.config.js` 파일의 가장 밑에 다음을 추가하였다.
+```js
+  },
+  assetPrefix: (() => {
+    switch (process.env.APP_ENV) {
+      case 'development':
+        if (process.env.CI === 'true') {
+          return process.env.NEXT_ASSET_PREFIX || ''
+        }
+        return ''
+      default:
+        return ''
+    }
+  })()
+}
+
+module.exports = withNextIntl(nextConfig)
+```
+
+위 코드에서 새로 등장한 `NEXT_ASSET_PREFIX` 와 `CI`라는 환경변수는 Next.js에 있는 `.env.development.set` 혹은 다른 `.env` 파일에 정의해놓지 않고 저렇게 둔다. → 왜냐하면 이건 Dockerfile에서 돌릴 때 주입해 줄 환경변수이라 local에서는 필요없다.
+
+`CI`를 추가한 이유는 개발자들이 local 환경에서 `npm run build:dev`를 돌릴 때 잘 작동하도록 해노았다. local에서는 `CI`값을 설정 안 해놨으니 당연히 `true`가 아닐 것이고 이건 Dockerfile에서 true를 주입해 줄 것이다.
+
+#### 다시 pipeline 코드
+129번째 line에 다음을 추가해주었다.
+```groovy
+    } else if (ENABLE_DOCKER_NODE_PNPM_YN == "Y") {
+        sh """#!/bin/bash
+        cp -r scm/docker/DockerfileForNodePnpm project/Dockerfile &> /dev/null
+        cp -r scm/license/ project/ &> /dev/null
+        """
+```
+
+그리고 `docker/DockerfileForNodePnpm`이라는 파일을 새로 생성하였다.
+```Dockerfile
+FROM node:lts-alpine3.21
+
+ARG BUILD_PROFILE=build:dev
+ENV BUILD_PROFILE ${BUILD_PROFILE}
+ARG START_PROFILE=start:dev
+ENV START_PROFILE ${START_PROFILE}
+ARG NEXT_BUILD_NUM
+ENV NEXT_BUILD_NUM ${NEXT_BUILD_NUM}
+ARG NEXT_ASSET_PREFIX
+ENV NEXT_ASSET_PREFIX ${NEXT_ASSET_PREFIX}
+ENV CI=true
+ENV NODE_OPTIONS="--max-old-space-size=8192"
+
+USER root
+WORKDIR /app
+ADD . /app/
+
+# Install dependencies
+RUN corepack enable && \
+    corepack prepare pnpm@latest --activate
+
+# Set npm to use the private registry
+RUN npm config set registry http://10.0.2.208:8081/repository/npm-proxy/
+
+RUN pnpm install
+
+# Build the application
+RUN NEXT_ASSET_PREFIX=https://cdn-fo.x2bee.com/${NEXT_BUILD_NUM} npm run ${BUILD_PROFILE}
+
+# Expose application port
+EXPOSE 3000
+
+# Start the application
+CMD npm run ${START_PROFILE}
+```
+
+위 코드를 보면 `CI=true`를 해놓고
+pipeline.groovy에서 받은 `${NEXT_BUILD_NUM}` 인자를 가지고
+`RUN NEXT_ASSET_PREFIX=https://cdn-fo.x2bee.com/${NEXT_BUILD_NUM} npm run ${BUILD_PROFILE}`
+URL을 생성하여 환경변수를 주입시켰다.
+
+추가로 pipeline에 넣어 줄 코드가 더 있지만 그 전에 필요한 Jenkins plugin을 설치해주자.
 
 
+## 3. Jenkins plugin 설치
