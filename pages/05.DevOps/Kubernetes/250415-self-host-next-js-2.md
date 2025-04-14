@@ -113,6 +113,7 @@ Alias를 선택하고, `Alias to CloudFront distribution`을 선택하고 설정
 
 
 ## 2. keeping static files of the last two builds
+#### 전략적 고민
 진행하기 전에 이 문제에 대해서 고민을 해보자.
 지난 글에서 봤듯이 **무중단 배포**를 위해서 우리는 
 기존에 배포되어있는 정적파일 → **노란색, N-1번째 배포 파일**라고 부르자
@@ -122,7 +123,7 @@ Alias를 선택하고, `Alias to CloudFront distribution`을 선택하고 설정
 이것은 필요가 없으니 삭제해주는 것이 좋다.
 만약 배포를 딱 3번만 했다면 이 3가지가 한 폴더에 섞여있을 것이다.
 
-![center|200](_images/cdn002.png)
+![center|200](./_images/cdn002.png)
 
 저 CDN이라는 이름의 컵에 필요없는 N-2번째 빨간색 파일을 어떻게 삭제해 줄 것인가?
 저 구슬(정적 파일) 하나만 없어도 웹페이지가 `client error`라는 문구와 함께 blank page가 떠버리는 모든 파일이 소중하지만, 사실 용량 자체는 별로 되지 않는다.
@@ -135,8 +136,8 @@ Alias를 선택하고, `Alias to CloudFront distribution`을 선택하고 설정
 여러 가지 방법이 있을 수 있겠다.
 내가 생각해 낸 방법은 처음부터 폴더로 정리하는 방법이다.
 
-![center|200](_images/cdn001.png)
-폴더별로 담아놓고 빨간 폴더만 삭제해주면 된다.
+![center|200](./_images/cdn001.png)
+폴더별로 담아놓고 빨간 폴더만 삭제해주면 된다. (참고: 위 두 이미지는 GPT로 그린 그림)
 
 그러나 이 방법도 단점이 있다.
 1. Next.js application이 어떤 폴더를 바라보는지 알아야하고
