@@ -58,6 +58,91 @@ WAF 메뉴에서 아무거나 선택 가능하지만 첫번째 `Enable security 
 위에 설정이 다 끝났으면 나머지는 default setting으로 하고 우측 하단의 `Create distribution`을 클릭하여 생성한다.
 
 #### Update S3 policy
+CloudFront distribution이 생성된 후 클릭하고
+위에 탭 중 Origins → Edit를 클릭하면
+![](./_images/Pasted%20image%2020250414102903.png)
+중간에 다음 버튼이 보인다.
+여기서 Copy policy를 클릭하고
+![250](./_images/Pasted%20image%2020250414102949.png)
+설정해놓은 S3 bucket의 policy를 edit한다.
+
+```json
+{
+    "Version": "2012-10-17",
+    "Id": "VpcSourceIp",
+    "Statement": [
+        {
+            "Sid": "VpcSourceIp",
+						... 이미 설정이 되어있는 부분 밑에 추가
+        },
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            ... 여기다가 추가해준다.
+        }
+    ]
+}
+```
+
+위에처럼 이미 설정이 되어있는 policy가 있다면 복사한 것을 밑에 추가해준다.
+
+#### AWS Route53
+Route53에 들어가 A record를 등록해준다.
+![](./_images/Pasted%20image%2020250414103428.png)
+Record type을 `A`로 지정하고
+Alias를 선택하고, `Alias to CloudFront distribution`을 선택하고 설정해준다.
+
+#### CORS
+이 CDN을 Next.js의 웹 페이지에서 액세스하기 위해 CORS설정을 해준다.
+다시 AWS CloudFront 메뉴로 가서
+좌측메뉴에 **Policies** 선택
+위 메뉴에서 **Response headers** 선택
+밑에 *Create response headers policy* 클릭
+
+![](./_images/Pasted%20image%2020250414104349.png)
+
+설정에서 아래와 같은 방식으로 allow 해준다.
+![](./_images/Pasted%20image%2020250414104627.png)
+
+위와 같이 생성된 custom policy를 이제 CloudFront distribution에 할당해주면 된다.
+다시 좌측메뉴 에서 Distribution 선택 → 해당 선택
+*Behaviors* 탭에서 선택하고 Edit
+*Response headers policy - optional* 에서 위에서 만든 것 적용 → Save
+
+이제 브라우저에서 엑세스가 되는지 테스트 해본다.
+`https://cdn.example.com/abc.jpg` 제대로 뜨면 CDN 설정은 완료되었다.
+
+
+## 2. keeping static files of the last two builds
+진행하기 전에 이 문제에 대해서 고민을 해보자.
+지난 글에서 봤듯이 **무중단 배포**를 위해서 우리는 
+기존에 배포되어있는 정적파일 → **노란색, N-1번째 배포 파일**라고 부르자
+그리고 새로 배포가 된 정적파일 → **파란색, N번째 배포 파일**라고 부르자
+이 두 개만 유지하면 되고
+그 이전에 배포되어있던 정적파일 → **빨간색, N-2번째 배포 파일**라고 부르자
+이것은 필요가 없으니 삭제해주는 것이 좋다.
+만약 배포를 딱 3번만 했다면 이 3가지가 한 폴더에 섞여있을 것이다.
+
+![center|200](_images/cdn002.png)
+
+저 CDN이라는 이름의 컵에 필요없는 N-2번째 빨간색 파일을 어떻게 삭제해 줄 것인가?
+저 구슬(정적 파일) 하나만 없어도 웹페이지가 `client error`라는 문구와 함께 blank page가 떠버리는 모든 파일이 소중하지만, 사실 용량 자체는 별로 되지 않는다.
+한 개당 kb단위. 그래서 무한정 쌓아둘 수도 있겠다.
+
+그러나 N-2번째 파일들을 지우면 좋겠는데 어떻게 지울까?
+혹시나... CDN이라는 컵 자체를 싹 비워버리고 N-1과 N번째 구슬만 담자라는 생각은 동작하지 않는다. 왜냐하면 CDN을 비우는 순간 바로 웹페이지가 에러가 나기 때문이다.
+즉, 빨간 구슬이 담겨있는 상태에서 노란 구슬과 파란 구슬을 다 **담은 후**에 빨간 구슬을 빼내야한다.
+
+여러 가지 방법이 있을 수 있겠다.
+내가 생각해 낸 방법은 처음부터 폴더로 정리하는 방법이다.
+
+![center|200](_images/cdn001.png)
+폴더별로 담아놓고 빨간 폴더만 삭제해주면 된다.
+
+그러나 이 방법도 단점이 있다.
+1. Next.js application이 어떤 폴더를 바라보는지 알아야하고
+2. Jenkins가 어떤 폴더에 업로드를 해야하는지 알아야하고
+3. ArgoCD(K8s pod)가 어떤 폴더를 봐야하는지
+이 세 가지를 다 약속을 해서 통일해줘야 가능한 일이다.
 
 
 
