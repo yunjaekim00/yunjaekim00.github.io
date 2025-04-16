@@ -4,7 +4,7 @@ date: 2025-01-19
 ---
 # Istio에서 IP whitelist 적용하기
 ## 문제의 발단
-![center](<Istio/_images/2025-01-19_.excalidraw.svg>)
+![center](_images/2025-01-19_waf.excalidraw.svg)
 ### 목적
 - 특정 IP 주소를 제외한 모든 IP 주소의 접속을 차단한다.
 - 다른 모든 IP에서 접속시 공지사항 html을 웹페이지를 띄운다. (이하 customized error page라고 하겠다.)

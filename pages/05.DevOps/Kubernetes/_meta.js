@@ -6,7 +6,7 @@ export default {
 	Istio: {
 		title: "Istio",
 	},
-	zero-downtime: {
+	zerodowntime: {
 		title: "무중단 배포",
 	},
 	etc: {
