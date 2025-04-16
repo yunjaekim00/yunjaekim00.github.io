@@ -1,8 +1,4 @@
 export default {
-	_images: {
-		title: "images",
-		display: "hidden"
-	},
 	Istio: {
 		title: "Istio",
 	},
