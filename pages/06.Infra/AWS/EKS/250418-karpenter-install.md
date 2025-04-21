@@ -41,32 +41,23 @@ aws sts get-caller-identity
 
 ```sh
 export KARPENTER_VERSION="1.3.3"
+export TEMPOUT="$(mktemp)"
 export CLUSTER_NAME=MOON-STAGE
 export K8S_VERSION=1.31
-```
-
-```sh
 export KARPENTER_NAMESPACE=kube-system
 export AWS_PARTITION="aws"
-export AWS_REGION="$(aws configure list | grep region | tr -s " " | cut -d" " -f3)"
-export AWS_DEFAULT_REGION="$(aws configure list | grep region | tr -s " " | cut -d" " -f3)"
-export OIDC_ENDPOINT="$(aws eks describe-cluster --name "${CLUSTER_NAME}" \
-    --query "cluster.identity.oidc.issuer" --output text)"
-export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' \
-    --output text)
-export ALIAS_VERSION="$(aws ssm get-parameter --name "/aws/service/eks/optimized-ami/${K8S_VERSION}/amazon-linux-2023/x86_64/standard/recommended/image_id" --query Parameter.Value | xargs aws ec2 describe-images --query 'Images[0].Name' --image-ids | sed -r 's/^.*(v[[:digit:]]+).*$/\1/')"
-export TEMPOUT="$(mktemp)"
 ```
 
 ```sh
-export ARM_AMI_ID="$(aws ssm get-parameter --name /aws/service/eks/optimized-ami/${K8S_VERSION}/amazon-linux-2-arm64/recommended/image_id --query Parameter.Value --output text)"
-export AMD_AMI_ID="$(aws ssm get-parameter --name /aws/service/eks/optimized-ami/${K8S_VERSION}/amazon-linux-2/recommended/image_id --query Parameter.Value --output text)"
-export GPU_AMI_ID="$(aws ssm get-parameter --name /aws/service/eks/optimized-ami/${K8S_VERSION}/amazon-linux-2-gpu/recommended/image_id --query Parameter.Value --output text)"
+export AWS_ACCOUNT_ID=$(aws sts get-caller-identity --query 'Account' \
+    --output text)
+export AWS_REGION="$(aws configure list | grep region | tr -s " " | cut -d" " -f3)"
+export ALIAS_VERSION="$(aws ssm get-parameter --name "/aws/service/eks/optimized-ami/${K8S_VERSION}/amazon-linux-2023/x86_64/standard/recommended/image_id" --query Parameter.Value | xargs aws ec2 describe-images --query 'Images[0].Name' --image-ids | sed -r 's/^.*(v[[:digit:]]+).*$/\1/')"
 ```
 
 변수들이 세션에 잘 저장되었는지 몇 개만 출력해보자.
 ```sh
-echo -e "Region: ${AWS_REGION} \nOIDC: ${OIDC_ENDPOINT} \nAWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID} \nALIAS_VERSION: ${ALIAS_VERSION}"
+echo -e "Region: ${AWS_REGION} \nAWS_ACCOUNT_ID: ${AWS_ACCOUNT_ID} \nALIAS_VERSION: ${ALIAS_VERSION}"
 ```
 
 ### CloudFormation 생성
