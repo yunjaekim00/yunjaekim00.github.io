@@ -11,6 +11,7 @@ export default {
   "01.Thoughts": {
     title: "나의 생각",
     type: "page",
+    display: "hidden",
   },
   "02.AI": {
     title: "AI",
