@@ -14,6 +14,9 @@ export default {
 	OpenSearch: {
 		title: "OpenSearch",
 	},
+	Security: {
+		title: "Security",
+	},
 	Terraform: {
 		title: "Terraform",
 	},
