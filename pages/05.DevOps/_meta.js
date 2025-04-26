@@ -23,4 +23,7 @@ export default {
 	Ansible: {
 		title: "Ansible",
 	},
+	etc: {
+		title: "etc",
+	}
 };
