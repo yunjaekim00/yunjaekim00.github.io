@@ -39,7 +39,7 @@ module.exports = withSentryConfig(module.exports, {
 ```
 
 ### 추가 리팩토링
-우리 프로젝트는 `/src/app`에 root layout 파일이 없고 `/src/app/[locale]`에 root layout이 있는데, 자동 설치 프로그램이 이를 인지 못하고 `layout.tsx` 파일을 생성해버린다. → 이 파일을 삭제한다. (공식문서에도 삭제하라고 되어있음.)
+우리 프로젝트는 `/src/app`에 root layout 파일이 없고 `/src/app/[locale]`에 root layout이 있는데, 자동 설치 프로그램이 이를 인지 못하고 `layout.tsx` 파일을 생성해버린다. → 이 파일을 삭제한다. (공식문서에도 삭제하라고 되어있음.) 그리고 `/src/app/sentry-example-page`폴더를 `src/app/[locale]/sentry-example-page`안으로 옮긴다.
 
 VS code와 같은 IDE에서 전부 찾아바꾸기를 한다.
 `"https://ba7a5b1daa3163ea2a4asd332b4b9e96@dev-sentry.x2bee.com/16"` 이렇게 된 것을 전부 `process.env.NEXT_PUBLIC_SENTRY_DSN`으로 변경한다. (3군데 정도가 바뀜)
