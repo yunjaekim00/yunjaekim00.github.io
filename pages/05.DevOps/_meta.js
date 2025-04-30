@@ -8,9 +8,6 @@ export default {
 	Git: {
 		title: "Git",
 	},
-	Jenkins: {
-		title: "Jenkins",
-	},
 	Kubernetes: {
 		title: "Kubernetes",
 	},
