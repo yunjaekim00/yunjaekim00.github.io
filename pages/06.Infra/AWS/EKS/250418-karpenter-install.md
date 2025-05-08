@@ -264,7 +264,7 @@ NodePool은 이런 NodeClass를 어떤 아키텍처로 가져가느냐에 관련
 
 다음 실행
 
-```yaml ln:true hl:18-21,42-43 title:node-pool.yaml
+```yaml ln:true hl:5,18-21,42-43 title:node-pool.yaml
 cat <<EOF | envsubst | kubectl apply -f -
 apiVersion: karpenter.sh/v1
 kind: NodePool
