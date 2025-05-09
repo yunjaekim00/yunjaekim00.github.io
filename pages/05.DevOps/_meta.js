@@ -11,6 +11,9 @@ export default {
 	Kubernetes: {
 		title: "Kubernetes",
 	},
+	Nginx: {
+		title: "Nginx",
+	},
 	OpenSearch: {
 		title: "OpenSearch",
 	},
