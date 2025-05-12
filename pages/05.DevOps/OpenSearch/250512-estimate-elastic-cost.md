@@ -42,7 +42,7 @@ m7g.large.search  (2 CPU, 8 GiB) x 3개  각각 20GiB EBS
 #### 3. Elastic Cloud
 https://cloud.elastic.co/pricing?elektra=pricing-page 여기서 예상 비용 볼 수 있다.
 위와 비슷한 환경을 계산해보자면 (예상비용 계산시 스토리지는 선택권이 없는듯 → 720 GB)
-![300](_images/Pasted%20image%2020250512101459.png)
+![300](./_images/Pasted%20image%2020250512101459.png)
 시간당 0.7464 USB x 720시간하면 = **537.4 USD**
 
 ### 결론
