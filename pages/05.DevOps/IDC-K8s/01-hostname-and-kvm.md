@@ -4,30 +4,23 @@ date: 2025-06-09
 ---
 # 01. IDC 서버에 hostname 설정 및 KVM 설치
 ## 목표
-​
-호스트 센터에서 IDC 서버에 Ubuntu 22.04 OS를 설치해주었다. 이제
-​
-1\. hostname을 바꾸고
-​
-2\. KVM(가상화 환경)을 설치해보자.
+​호스트 센터에서 IDC 서버에 Ubuntu 22.04 OS를 설치해주었다. 이제
+1. hostname을 바꾸고
+2. KVM(가상화 환경)을 설치해보자.
 ​
 ## Hostname 변경
-​
-이유: IP주소의 끝자리로 서버를 부르면 (예: 242서버, 244서버) 더 알기 쉽지만, '베몬'서버, '아이브'서버로 부르면  팀 문화가 좀 더 밝아질까에 대한 기대 외에는 딱히 없음.
-​
-### 001\. SSH 접속
-​
-에스파를 좋아하니 에스파로 변경해보겠다.
+​이유: IP주소의 끝자리로 서버를 부르면 (예: 242서버, 244서버) 더 알기 쉽지만, '베몬'서버, '아이브'서버로 부르면  팀 문화가 좀 더 밝아질까에 대한 기대 외에는 딱히 없음.
+### 001. SSH 접속
+​에스파를 좋아하니 에스파로 변경해보겠다.
 ​
 ```
 hostnamectl set-hostname AESPA
 ```
 ​
-\`hostnamectl\`명령으로 호스트명을 한 번에 바꿔줍니다.
+위처럼 `hostnamectl` 명령으로 호스트명을 한 번에 바꿔줍니다.
 ​
 확인
-​
-```
+```sh
 > cat /etc/hostname
 AESPA
 > nano /etc/hosts
@@ -35,22 +28,21 @@ AESPA
 > hostnamectl
 ```
 ​
-/etc/hosts는 자동으로 매핑이 안 되어있는 경우가 있으니 수동으로 바꿔준다.
+`/etc/hosts`는 자동으로 매핑이 안 되어있는 경우가 있으니 수동으로 바꿔준다.
 ​
 터미널 닫고 다시 열면 프롬프트가 바뀐 것을 볼 수 있다.
 ​
-```
+```sh
 tech@AESPA:~$
 ```
 ​
 ## KVM
-​
-KVM 설치 이유: VM(가상 머신)을 띄워, 논리적으로 분리된 환경을 손쉽게 만들 수 있습니다.
+​KVM 설치 이유: VM(가상 머신)을 띄워, 논리적으로 분리된 환경을 손쉽게 만들 수 있습니다.
 ​
 ### 002\. CPU 가 가상장비를 지원하는지 확인
 ​
-```
-egrep -c '(vmx|svm)' /proc/cpuinfo ## 숫자가 0보다 크면 된다.  
+```sh
+egrep -c '(vmx|svm)' /proc/cpuinfo  ## 숫자가 0보다 크면 된다.  
 ```
 ​
 `vmx` : Intel VT-x (Intel Virtualization Technology)  
@@ -64,7 +56,7 @@ egrep -c '(vmx|svm)' /proc/cpuinfo ## 숫자가 0보다 크면 된다.
 ​
 다음에는 `kvm-ok`라는 utility를 설치해서 KVM acceleration이 지원되는 지 알아본다.
 ​
-```
+```sh
 sudo apt update  
 sudo apt install cpu-checker -y
 ```
@@ -73,17 +65,16 @@ cpu-checker 패키지 안에 kvm-ok라는 tool이 내장되어있다.
 ​
 위 cpu-checker를 설치해서 이제 kvm-ok를 사용할 수 있다.
 ​
-```
+```sh
 > kvm-ok ## 이 명령어를 실행했을 때 아래처럼 출력  
 INFO: /dev/kvm exists  
 KVM acceleration can be used
 ```
 ​
-### 003\. KVM 설치
+### 003. KVM 설치
+#### 1. KVM 및 필수 유틸리티 설치
 ​
-#### 1\. KVM 및 필수 유틸리티 설치
-​
-```
+```sh
 sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils virtinst virt-manager
 ```
 ​
@@ -151,15 +142,15 @@ sudo adduser $USER kvm
 ​
 ### 005\. KVM 설치 확인
 ​
-```
+```sh
 > virsh list --all
  Id   Name   State
 --------------------
 ```
 ​
-### 006\. 재부팅
+### 006. 재부팅
 ​
-```
+```sh
 sudo systemctl reboot  
 ```
 ​
