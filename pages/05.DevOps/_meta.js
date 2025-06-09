@@ -1,6 +1,6 @@
 export default {
-	general: {
-		title: "일반",
+	"IDC-K8s": {
+		title: "IDC on-premise",
 	},
 	Docker: {
 		title: "Docker",
