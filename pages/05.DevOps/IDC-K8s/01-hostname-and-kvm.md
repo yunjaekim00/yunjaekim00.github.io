@@ -84,13 +84,13 @@ sudo apt install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils 
 `virtinst`: CLI로 VM을 control하거나 CLI script로 VM을 생성할 때 필요한 tool  
 `virt-manager`: GUI for managing VM
 ​
-```
+```sh
 sudo usermod -aG libvirt $(whoami)
 ```
 ​
 root 계정으로 쓸 거면 이 명령어는 생략
 ​
-#### 2\. libvirtd 서비스 상태 확인 및 시작
+#### 2. libvirtd 서비스 상태 확인 및 시작
 ​
 ```
 > sudo systemctl status libvirtd
@@ -99,24 +99,24 @@ Active: inactive (dead)
 ​
 처음에는 위처럼 inactive 상태. 아래처럼 자동 시작을 설정해준다.
 ​
-```
+```sh
 sudo systemctl enable libvirtd
 sudo systemctl start libvirtd
 sudo systemctl status libvirtd
 ```
 ​
-### 004\. 사용자 계정을 Libvirt 및 Kvm 에 추가
+### 004. 사용자 계정을 Libvirt 및 Kvm 에 추가
 ​
 확인
 ​
-```
+```sh
 > getent group libvirt
 libvirt:x:140:tech
 > id root
 uid=0(root) gid=0(root) groups=0(root)
 ```
 ​
-```
+```sh
 > adduser $USER libvirt
 Adding user `root' to group `libvirt' ...
 Adding user root to group libvirt
@@ -125,7 +125,7 @@ Done.
 ​
 확인
 ​
-```
+```sh
 > getent group libvirt
 libvirt:x:140:tech,root
 > id root
@@ -134,13 +134,13 @@ uid=0(root) gid=0(root) groups=0(root),140(libvirt)
 ​
 KVM도 마찬가지로 더해줌
 ​
-```
+```sh
 sudo adduser $USER kvm  
 ```
 ​
 위 명령어는 `sudo usermod -aG libvirt,kvm $USER`와 동일한 명령어
 ​
-### 005\. KVM 설치 확인
+### 005. KVM 설치 확인
 ​
 ```sh
 > virsh list --all
