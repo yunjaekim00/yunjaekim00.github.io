@@ -1,7 +1,6 @@
 export default {
 	general: {
 		title: "일반",
-		display: "hidden",
 	},
 	Docker: {
 		title: "Docker",
