@@ -37,7 +37,7 @@ KVM으로 생성
 다운로드 받았으니 첫번째 옵션 ISO image로 설치를 선택
 ![300](./_images/Pasted%20image%2020250519130238.png)
 → Forward → (다음 그림을 처음 설정시에만 뜨는 화면이다) 왼쪽 밑 `+`(Add pool) 
-![450|center](./_images/Pasted%20image%2020250531041659.png)
+![450|left](./_images/Pasted%20image%2020250531041659.png)
 → Finish → iso 선택 → Choose Volume
 
 
