@@ -3,7 +3,8 @@ title: 06. Master Node 추가 설치
 date: 2025-06-11
 ---
 # 06. Master Node 설치
-다음은 `4. VM 생성 및 네트워크 설정 (Master Worker 공통)`에 이어서 Master Node 설치에만 적용되는 사항
+다음은 `4. VM 생성 및 네트워크 설정 (Master Worker 공통)`에 이어서 Master Node 설치에만 적용되는 사항.
+[04-create-vm-install-cri](04-create-vm-install-cri.md) 테스트
 ## install kubeadm
 
 공식문서: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
@@ -213,7 +214,7 @@ k8s-master-node-ive   Ready    control-plane   23h   v1.33.1   192.168.122.68   
 k8s-worker-2-aespa    Ready    worker          71m   v1.33.1   192.168.122.78   <none>        Ubuntu 22.04.5 LTS   5.15.0-140-generic   containerd://2.1.0
 ```
 
-이유는 디폴트로 해당 node의 kubelet이 자신의 주 인터페이스(DHCP로 할당된 NAT)를 Internal IP로 등록했기 때문에, Metrics Server가 정확히 그 주소를 사용해서 통계를 수집하려고 하는데, 당연히 Flannel/Calico 내부에서는 그곳으로 라우팅할 수 없기 때문이다.
+이유는 디폴트로 해당 node의 kubelet이 자신의 주 인터페이스(DHCP로 할당된 NAT)를 Internal IP로 등록했기 때문에, Metrics Server가 정확히 그 주소를 사용해서 통계를 수집하려고 하는데, Calico 내부에서는 그곳으로 라우팅할 수 없기 때문이다.
 이는 앞의 글(이론)에서 살펴보았듯이 NAT 대신 실제 클러스터 네트워크에서 접근 가능한 IP를 사용하도록 kubelet을 구성해야 하기 때문이다.
 → 각 node의 Kubelet 에게 VXLAN 주소 (10.10.10.x) 를 node 내부IP로 쓰게 해줘야한다.
 Then Metrics Server will connect to 10.10.10.12:10250, which is routable.
