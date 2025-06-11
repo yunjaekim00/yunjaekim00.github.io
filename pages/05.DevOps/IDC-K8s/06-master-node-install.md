@@ -2,9 +2,8 @@
 title: 06. Master Node 추가 설치
 date: 2025-06-11
 ---
-# 06. Master Node 설치
-다음은 `4. VM 생성 및 네트워크 설정 (Master Worker 공통)`에 이어서 Master Node 설치에만 적용되는 사항.
-[04-create-vm-install-cri](04-create-vm-install-cri.md) 테스트
+# 06. Master Node 추가 설치
+다음은 [4. VM 생성 및 네트워크 설정 (Master Worker 공통)](04-create-vm-install-cri.md)에 이어서 Master Node 설치에만 적용되는 사항.
 ## install kubeadm
 
 공식문서: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#installing-kubeadm-kubelet-and-kubectl
@@ -196,6 +195,7 @@ kubeadm token create --print-join-command
 ```
 
 ## Install metrics server
+### 네트워크 설정
 확인
 ```sh
 k top node
@@ -251,6 +251,7 @@ k8s-worker-2-aespa    Ready    worker          89m   v1.33.1   10.10.10.12   <no
 
 node IP가 private IP로 바뀌어있는 것을 확인
 
+### Metrics 설치
 이제 다음 명령어로 **Master node**에서만 metrics 설치
 metrics를 다운로드 받는다.
 metrics pod가 생성이 안 되는데 이는 mTLS 때문이다. metrics server는 metrics만 필요하므로 patch를 통해 mTLS를 metrics에서만 해제시키기 위해 다운로드받아서 수정하기 위함.
