@@ -58,14 +58,15 @@ sudo kubeadm init \
 	[addons] Applied essential addon: CoreDNS
 [addons] Applied essential addon: kube-proxy
 ````
-
+ 
 이는 static pods가 아니고 addon이다.
-
+ 
 마지막 메세지는 
-```txt
-Your Kubernetes control-plane has initialized successfully!
+  
+```bash
+Your Kubernetes control-plane has initialized successfully
 
-To start using your cluster, you need to run the following as a regular user:
+To start using your cluster, you need to run the following as a regular user
 
   mkdir -p $HOME/.kube
   sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
@@ -76,7 +77,7 @@ Alternatively, if you are the root user, you can run:
   export KUBECONFIG=/etc/kubernetes/admin.conf
 
 You should now deploy a pod network to the cluster.
-Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at
   https://kubernetes.io/docs/concepts/cluster-administration/addons/
 
 Then you can join any number of worker nodes by running the following on each as root:
@@ -84,7 +85,7 @@ Then you can join any number of worker nodes by running the following on each as
 kubeadm join 10.10.10.11:6443 --token 12xgms.mw6legd1toal8f35 \
         --discovery-token-ca-cert-hash sha256:2213e705350f94abe9b47ee4a1f29d8e59c19f37833fe17bd8f302297f7629bd 
 ```
-
+  
 
 ```sh
 export KUBECONFIG=/etc/kubernetes/admin.conf

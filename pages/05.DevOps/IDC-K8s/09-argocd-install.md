@@ -292,8 +292,9 @@ Settings > Projects > x2bee-stg로 와서
 
 → Create
 다시 Roles 선택 → JWT token 생성 → 복사하고
+
 ```txt
-eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJwcm9qOngyYmVlLXN0ZzphcmdvY2Qtcm9sZS1zdGciLCJuYmYiOjE3NDgyNDU2MzAsImlhdCI6MTc0ODI0NTYzMCwianRpIjoiZTExZjUxYzQtNGM2Yy00N2U4LWE1ZTUtYmIyMDBiZmEwYzI2In0.YIKuKGdetzwbGXH_Jkwkt_OKT6KFFU9c7V-wUSpCsq8
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJhcmdvY2QiLCJzdWIiOiJwcm9qOngyYmVlLXN0ZzphcmdvQtcm9sZS1zdGciLCJuYmYiOjE3N2MzAsImlhdCI6MTc0ODI0NTYzMCwianRpIjoiZTExZjUxYzQtNGM2Yy00N2U4LWE1ZTUtYmIyMDBiZmEwYzI2In0.YIKuKGdetzwbGXH_Jkwkt_OKT6KFFU9c7V-wUSpCsq8
 ```
 
 
