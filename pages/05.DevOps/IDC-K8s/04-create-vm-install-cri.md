@@ -3,6 +3,7 @@ title: 04. VM 생성 및 네트워크 설정 (Master Worker 공통)
 date: 2025-06-10
 ---
 # 04. VM 생성 및 네트워크 설정 (Master Worker 공통)
+다음은 Master Node와 Worker Node를 생성 설치할 때 공통으로 하는 작업
 ## Prerequisite
 
 ```sh
