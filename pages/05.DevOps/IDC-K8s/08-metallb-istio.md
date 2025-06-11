@@ -1,5 +1,5 @@
 ---
-title: 08-metallb-istio
+title: 08. Metal LB와 Istio 설치
 date: 2025-06-11
 ---
 # 08. Metal LB와 Istio 설치
