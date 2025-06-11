@@ -54,9 +54,9 @@ sudo kubeadm init \
 - kubelet-start stage : kubelet을 시작한다. 그러므로 `service kubelet status`를 치면 이제 `active (running)`이라고 나온다.
 - control-plane stage : `/etc/kubernetes/manifests`에 static pod의 manifest file을 이용하여 생성
 - addons : 
-	```sh
+	```bash
 	[addons] Applied essential addon: CoreDNS
-[addons] Applied essential addon: kube-proxy
+[[addons] Applied essential addon: kube-proxy
 ````
  
 이는 static pods가 아니고 addon이다.
