@@ -58,10 +58,10 @@ sudo kubeadm init \
 	[addons] Applied essential addon: CoreDNS
 [addons] Applied essential addon: kube-proxy
 ````
-	
-	이는 static pods가 아니고 addon
 
-- 마지막 메세지는 
+이는 static pods가 아니고 addon이다.
+
+마지막 메세지는 
 ```txt
 Your Kubernetes control-plane has initialized successfully!
 
@@ -85,9 +85,11 @@ kubeadm join 10.10.10.11:6443 --token 12xgms.mw6legd1toal8f35 \
         --discovery-token-ca-cert-hash sha256:2213e705350f94abe9b47ee4a1f29d8e59c19f37833fe17bd8f302297f7629bd 
 ```
 
+
 ```sh
 export KUBECONFIG=/etc/kubernetes/admin.conf
 ```
+
 해도 되지만
 
 export 명령어는 그 세션에만 적용되니 의미가 없다. 그러므로 아래를 따름
