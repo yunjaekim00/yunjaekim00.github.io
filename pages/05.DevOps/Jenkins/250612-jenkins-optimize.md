@@ -154,18 +154,17 @@ FROM node:20.10.0-alpine3.18 AS runner
 # Only includes what's needed to run
 ```
 
-Buildx는 위 3가지 stage를 **병렬(simultaneous)**로 실행할 수 있다.
+Buildx는 위 3가지 stage를 **병렬(simultaneous)** 로 실행할 수 있다.
 
 전체 코드는 다음과 같다.
 `Dockerfile_node_yarn`을 다음과 같이 수정한다.
 
-```sh
+```Dockerfile ln:true
 # syntax=docker/dockerfile:1
 FROM node:20.10.0-alpine3.18 AS deps
 
 WORKDIR /app
 
-# Copy ALL files first (including local dependencies)
 COPY package.json ./
 COPY src/lib/x2bee-core ./src/lib/x2bee-core
 
@@ -182,18 +181,17 @@ ENV NODE_OPTIONS="--max-old-space-size=12288"
 
 WORKDIR /app
 
-# Copy dependencies from deps stage
+# Copy from deps stage
 COPY --from=deps /app/node_modules ./node_modules
-COPY --from=deps /app/package.json ./
+COPY package.json ./
 
-# Copy source files
 COPY . .
 
-# Build with caching for Next.js
+# Build the application
 RUN --mount=type=cache,target=/app/.next/cache \
-    yarn ${BUILD_PROFILE}
+    yarn ${BUILD_PROFILE} --no-lint
 
-# Production stage
+# Start stage
 FROM node:20.10.0-alpine3.18 AS runner
 
 ARG START_PROFILE
@@ -203,26 +201,14 @@ ENV HOST 0.0.0.0
 
 WORKDIR /app
 
-# Copy only necessary files for runtime
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./
-COPY --from=builder /app/.next* ./.next*
-COPY --from=builder /app/.nuxt* ./.nuxt*
-COPY --from=builder /app/dist* ./dist*
-COPY --from=builder /app/build* ./build*
-COPY --from=builder /app/public* ./public*
-COPY --from=builder /app/src ./src
-
-# Copy config files
-COPY --from=builder /app/*.config.* ./
-COPY --from=builder /app/.env* ./
+COPY --from=builder /app .
 
 EXPOSE 80
 
 CMD yarn ${START_PROFILE}
 ```
 
-Nuxt에서도 사용할 수 있게 `./.nuxt`도 넣어놨지만 사실 필요없는 코드.
+line 30: `--no-lint` ESLint warning 뜨는 것으로만 빌드 시간을 최소 4~5분 더 잡아먹는다. 개발자들이 1년이 넘도록 lint 수백개 못 잡고 Jenkins 느리다고 불만 중이다. 포기했다. 그래서 Jenkins에서는 lint 체크 안 하도록 추가해주었다.
 
 ## 결과
 ### Jenkins의 docker build 속도
