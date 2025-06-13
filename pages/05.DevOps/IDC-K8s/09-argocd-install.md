@@ -288,6 +288,7 @@ Settings > Repositories > git 등록
 Settings > Projects > x2bee-stg로 와서
 `+ ADD ROLE` 클릭
 ![400](./_images/Pasted%20image%2020250526164514.png)
+(Jenkins pipeline code에서 argocd create이 있다면 위 3가지에 추가해서 `create`도 생성해준다.)
 → Create
 
 → Create
