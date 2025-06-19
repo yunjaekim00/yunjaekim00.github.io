@@ -166,7 +166,8 @@ FROM node:20.10.0-alpine3.18 AS deps
 WORKDIR /app
 
 COPY package.json ./
-COPY src/lib/x2bee-core ./src/lib/x2bee-core
+# 아래 폴더는 우리가 따로 만든 library
+COPY src/lib ./src/lib
 
 # Install dependencies with local packages available
 RUN --mount=type=cache,target=/root/.yarn \
@@ -248,4 +249,43 @@ docker.x2bee.com/x2bee-backend/moon-x2bee-po_stg                            late
 
 `bo`: **6.96** GB → **1.49** GB로 줄어들었고
 `fo` : **4.32** GB → **2.34** GB로 줄어들었다.
+
+### 참고
+혹시나 Jenkins 빌드 시 `docker buildx` 명령어가 없어서 error가 난다면
+
+`docker-compose.yml`파일에서
+```yaml
+  image: jenkins/jenkins:2.511-jdk21
+```
+
+이 한 줄을 다음으로 수정하고
+
+```yaml
+    build:
+      context: .
+      dockerfile: Dockerfile.jenkins
+```
+
+`Dockerfile.jenkins`라는 파일을 하나 생성하여
+다음을 적어준다.
+
+```Dockerfile
+FROM jenkins/jenkins:2.511-jdk21
+
+USER root
+
+# Install Docker Buildx
+RUN mkdir -p ~/.docker/cli-plugins && \
+    curl -L https://github.com/docker/buildx/releases/download/v0.10.5/buildx-v0.10.5.linux-amd64 \
+    -o ~/.docker/cli-plugins/docker-buildx && \
+    chmod +x ~/.docker/cli-plugins/docker-buildx
+
+# Also install it for the jenkins user
+RUN mkdir -p /var/jenkins_home/.docker/cli-plugins && \
+    cp ~/.docker/cli-plugins/docker-buildx /var/jenkins_home/.docker/cli-plugins/docker-buildx && \
+    chmod +x /var/jenkins_home/.docker/cli-plugins/docker-buildx && \
+    chown -R jenkins:jenkins /var/jenkins_home/.docker
+
+USER root
+```
 
