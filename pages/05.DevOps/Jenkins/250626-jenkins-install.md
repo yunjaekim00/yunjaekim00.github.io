@@ -3,6 +3,7 @@ title: JCasC를 이용한 Jenkins 설치 자동화
 date: 2025-06-26
 ---
 # JCasC를 이용한 Jenkins 설치 자동화
+Ubuntu OS에서 적용
 ### JCasC
 Ansible이 광범위한 기능때문에 많이 사용을 하지만 솔직히 syntax가 좀 짜증나는 면이 많다.
 직관적이기 보다 필요한 기능이 있을 때마다 하나씩 하나씩 사전을 찾아봐야하는 느낌이랄까.
