@@ -1,5 +1,7 @@
 # next.js
 /.next/
+/.yarn/
+.pnp.*
 #.github/
 
 # dependencies
