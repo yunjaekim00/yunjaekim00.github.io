@@ -395,3 +395,15 @@ ARG ARGOCD_VERSION
 RUN curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64 && \
     chmod +x /usr/local/bin/argocd
 ```
+
+### 10. Debug
+플로그인을 자꾸 네트워크가 느린 중국에 있는 미러링 사이트에서 자동으로 받아오려고 하다가 뻑이난다.
+공식사이트에서 받아올 수 있게 다음 코드를 추가한다.
+
+`Dockerfile.jenkins`에 8번째 줄에 다음을 추가한다.
+```Dockerfile
+# Set Jenkins update center to official URL (avoids problematic mirrors)
+ENV JENKINS_UC=https://updates.jenkins.io
+ENV JENKINS_UC_DOWNLOAD_URL=https://updates.jenkins.io/download
+```
+
