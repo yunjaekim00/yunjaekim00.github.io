@@ -30,8 +30,6 @@ services:
       - TZ=Asia/Seoul
     volumes:
       - "/data/jenkins/jenkins_home:/var/jenkins_home"
-      - "/usr/local/bin/argocd:/usr/bin/argocd"
-      - "/data/argocd_config:/root/.argocd"
       - "/usr/bin/docker:/usr/bin/docker:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
@@ -70,9 +68,6 @@ JENKINS_TIMEZONE=Asia/Seoul
 
 # ArgoCD Configuration
 ARGOCD_VERSION=v3.0.5
-ARGOCD_URL=argocd.example.com
-ARGOCD_CONFIG_DIR=/data/argocd_config
-ARGOCD_INSTALL_DIR=/usr/local/bin
 ```
 
 `docker-compose.yml`은 다음과 같이 변경
@@ -87,8 +82,6 @@ services:
       - TZ=${JENKINS_TIMEZONE}
     volumes:
       - "${JENKINS_HOME}:/var/jenkins_home"
-      - "${ARGOCD_INSTALL_DIR}/argocd:/usr/bin/argocd:ro"
-      - "${ARGOCD_CONFIG_DIR}:/root/.argocd:ro"
       - "/usr/bin/docker:/usr/bin/docker:ro"
       - "/var/run/docker.sock:/var/run/docker.sock"
     ports:
@@ -313,18 +306,7 @@ Jenkins.instance.pluginManager.plugins.each{
 하단에 `Result: [Plugin:antisamy-markup-formatter, Plugin`로 시작하는 부분말고 그 위까지를 복사하여
 `jenkins-config/plugins.txt`파일을 생성하여 붙여넣기 한다.
 
-필요한 plugin들을 이제 text 파일 목록으로 설치할 것이므로 위에서 작성한 `Dockerfile.jenkins`의
-```Dockerfile
-# install Role-based authorization strategy plugin
-RUN jenkins-plugin-cli --plugins \
-    configuration-as-code \
-    role-strategy \
-    git \
-    workflow-aggregator \
-    github
-```
-이 부분을 전부 삭제하고
-다음 코드로 대체한다.
+필요한 plugin들을 이제 text 파일 목록으로 설치할 것이므로 위에서 작성한 `Dockerfile.jenkins`에 다음 코드를 추가한다.
 
 ```Dockerfile
 # Install plugins from plugins.txt
@@ -387,8 +369,29 @@ tool:
 ```sh
 docker compose --env-file argocd-jenkins.env up --build -d
 ```
-를 해보면 위의 모든 구성이 약 1분만에 완료된다.
+를 하면 설치가 완료된다.
 
-Jenkins console에서 WebUI로 수동으로 plugin 설치하면 오래걸리는데 CLI에서는 plugin 설치 시간이 훨씬 금방 끝난다.
+Jenkins console에서 WebUI로 수동으로 plugin 설치하면 오래걸리는데 CLI에서는 plugin 설치 시간이 조금 더 빠르다.
 
-이제 필요에 따라 Credentials를 입력하고, Items를 추가하는 일만 남았다.
+환경의 인터넷 속도에 따라 다르지만 전체 프로세스가 약 5~8분내에 완료된다.
+
+### 9. ArgoCD CLI 설치
+Jenkins에는 ArgoCD CLI도 설치가 안 되어있고, Jenkins plugin 목록에도 ArgoCD CLI가 없다.
+그래서 설치시 따로 설치해줄 필요가 있다.
+
+`docker-compose.yml`에 다음 한 줄을 추가해주고
+```yaml
+  args:
+     ARGOCD_VERSION: ${ARGOCD_VERSION}
+```
+
+`Dockerfile.jenkins`에 다음 코드 추가
+```Dockerfile
+ARG ARGOCD_VERSION
+
+...
+
+# Install ArgoCD CLI
+RUN curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/download/${ARGOCD_VERSION}/argocd-linux-amd64 && \
+    chmod +x /usr/local/bin/argocd
+```
