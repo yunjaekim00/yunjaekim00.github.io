@@ -524,3 +524,10 @@ kubectl apply -f fluentd.yaml
 
 ## Step 9. Nginx와 Route53 설정
 Nginx와 Route53에 적절하게 구성을 추가하고 바꾼다.
+
+### PV가 잘 동작하는 지 테스트
+```sh
+kubectl rollout restart deployment opensearch -n opensearch
+```
+
+pod를 재시작하고 dashboard에 접속해서 data가 안 날라가고 잘 있는지 확인해본다.
