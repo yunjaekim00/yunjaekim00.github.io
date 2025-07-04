@@ -532,4 +532,4 @@ kubectl rollout restart deployment opensearch -n opensearch
 
 pod를 재시작하고 dashboard에 접속해서 data가 안 날라가고 잘 있는지 확인해본다.
 
-git test
+끝.
