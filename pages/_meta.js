@@ -11,10 +11,12 @@ export default {
   "01.Thoughts": {
     title: "나의 생각",
     type: "page",
+    display: "hidden",
   },
   "02.AI": {
     title: "AI",
     type: "page",
+    display: "hidden",
   },
   "03.FrontEnd": {
     title: "FrontEnd",
@@ -39,9 +41,10 @@ export default {
   "08.Book-review": {
     title: "Books",
     type: "page",
+    display: "hidden",
   },
   "09.작성중": {
     title: "작성 중인 글들",
-    display: "hidden"
+    display: "hidden",
   }
 };
