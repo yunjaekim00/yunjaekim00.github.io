@@ -6,7 +6,7 @@ date: 2025-07-14
 ### 기본 개념
 Security를 위한 best practice 중 하나는, Admin user라고 무작정 admin privilege를 주지 않고 admin 이어도 kubectl과 같은 명령어로 system에 직접적으로 수정할 수 없게하고, kubectl로는 조회(describe, get)만 가능하게 하고 오직 Terraform과 같은 IaC로만 변경할 수 있게 한다.
 
-![center|600](./_images/Pasted%20image%2020250714173710.png)
+![center|400](./_images/Pasted%20image%2020250714173710.png)
 
 또한 least priviledge rule에 충실하게 특정 유저에게는 K8s cluster 전체에서 하나의 namespace를 조회할 권한만 줄 수 있다. (→ 이름은 상관없지만 여기서는 이를 위해 `developer`라는 유저를 만들 것이다.)
 특정 namespace에만 주는 역할은 `Role`이라는 K8s object가 있고, Admin user처럼 cluster 전체에 대한 권한(cluster-wide access)을 줄 때는 `ClusterRole`을 사용한다.
@@ -43,7 +43,7 @@ kubectl edit cm aws-auth -n kube-system
 기존 RBAC 방식에서 ConfigMap이 Access entry API로 바뀐 점 하나밖에 없지만, RBAC을 사용해보지 않았던 개발자라면 우선 RBAC 방식에 대해 이해할 필요가 있다. 그래야지만 복잡한 RBAC을 헷깔리지 않는다.
 가장 **중요한 점**은 어떤 것이 Kubernetes native 영역이고, 어디가 AWS EKS 고유의 영역이며, 어떤 영역이 AWS IAM 영역인지를 구분하는 일이다. 위 그림을 한 단계 더 자세히 보자면 (그리고 실제로 여기서 구현할 Terraform 코드의 계획) 다음과 같다.
 
-![center|600](./_images/Pasted%20image%2020250714173804.png)
+![400|center](./_images/Pasted%20image%2020250714173804.png)
 
 Kubernetes cluster 내의 이름은 당연히 절대 IAM user의 이름이 아니다. 그래서 'admin'이라는 Kubernetes의 user_name에 IAM user yjkim을 K8s role mapping을 해주어야 한다. K8s role mapping 기존 ConfigMap 방식때 이름이었고, 개념은 똑같지만 새로운 공식명칭은 **Access Entry**이다. 이름이 변경된 이유는 K8s role mapping은 실제로 AWS IAM의 user 혹은 roled을 K8s의 role에 mapping하는 것이지만 너무 기니깐 줄인 것이 K8s role mapping인데 이 단어에는 IAM이 안 들어가니 의미가 왜곡되서 그런 것. 아무튼 중요하지 않으니 여기서 줄이고.
 
