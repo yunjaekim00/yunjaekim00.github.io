@@ -94,3 +94,6 @@ Ingress는
 Egress는
 	AZ-1에서 : EKS Nodes → NAT Gateway(AZ-1) → IGW → Internet으로 가고
 	AZ-2에서 : EKS Nodes → private Route Table → NAT Gateway(AZ-1로 cross-AZ traffic) → IGW → Internet으로 가게 된다.
+
+생성 후 VPC 모습:
+![](./_images/Pasted%20image%2020250717150331.png)
