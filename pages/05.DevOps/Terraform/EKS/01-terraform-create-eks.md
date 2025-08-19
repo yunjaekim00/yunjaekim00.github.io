@@ -32,7 +32,10 @@ Single source of truth. 영어권 개발자들 사이에서는 자주 쓰는 말
 현재 우리가 사용하는 이 pipeline코드는 크게 Jenkinsfile과 ArgoCD helm chart 두 부분으로 나뉘고 이 코드는 Gitlab에 올려서 운영개발자 누구든지 gitlab 소스만 보면 현재 배포 상황과 Jenkins pipeline 코드를 알기 쉽고 수정도 용이하다. 즉, single source of truth가 Gitlab repository에 올려진 사례다.
 
 즉, AWS EKS 혹은 Azure AKS 서비스를 설치하고 수정하는 것도 이처럼 **Gitlab repo**에, 즉 single source of truth로 관리할 필요가 있다.
-이는 부수적인 여러 장점이 많다. Terraform 자체가 **가독성**이 좋기 때문에 이 자체로도 **documentation 역할을 대체**할 수 있을 정도이기 때문이다.
+DevOps와 Infra 담당이 Terminal에서 각자 helm install 와 같은 command를 날리면 누가 뭘 설치했는지 트래킹도 안 되기 때문에 더더욱 single source of truth가 필요하다.
+Terraform도 ArgoCD처럼 **현재 state**와 code에 적힌 **desired state**를 비교해서 일치하지 않으면 desired state로 변경시킨다.
+
+이 외에도 부수적인 여러 장점이 많다. Terraform 자체가 **가독성**이 좋기 때문에 이 자체로도 **documentation 역할을 대체**할 수 있을 정도이기 때문이다.
 
 잡설 : 
 여기서부터 Terraform을 이용해 AWS EKS을 구축할 것이고 시리즈로 쓸 예정이다.
