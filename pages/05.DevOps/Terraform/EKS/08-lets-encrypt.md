@@ -5,10 +5,10 @@ date: 2025-08-21
 # 08. Lets Encrypt 인증서
 이번 글에서는 Let's Encrypt 인증서에 대해 질문 답변 형식으로 블로그를 써보겠습니다.
 ### Let's Encrypt
-**Q:** Let's Encrypt에서 발급받는 TLS 인증서는 self-signed 인증서의 한 종류라서 개인 연습용 혹은 내부 시스템용 아닌가?
-**A:** 아니다. 
+**Q:** Let's Encrypt에서 발급받는 TLS 인증서는 self-signed 인증서의 한 종류인가? 만약 그렇다면 개인 연습용 혹은 내부 시스템용 아닌가?
+**A:** 아니다. CA 인증서이다. 
 - Self-signed 인증서 - 말 그대로 자체 인증(자신이 발급한 key pair로 sign)된 key 공용으로 신뢰할 수 없는 인증서
-- Let's Encrypt 인증서 - CA (Certificate Authority)에서 발급된 publicy trusted 인증서이다.
+- Let's Encrypt 인증서 - CA (Certificate Authority)에서 발급된 **publicy trusted 인증서**이다.
 
 **Q:** 그럼 Let's Encrypt으로 발급받은 인증서를 production에서 사용할 수 있나?
 **A:** Production에서도 사용할 수 있다.
@@ -60,7 +60,7 @@ Wildcard 도메인을 위한 ACME 챌린지는 특정 도메인(예: `app1.plate
 그러므로 위의 코드 두 줄을 주석처리했다가 다시 주석을 해제하지 않아도 된다.
 게다가 단일 도메인이 아니기 때문에, 도메인이 추가 될 때마다 다시 Certificate을 적용하고 ACME challenge를 하지 않아도 된다.
 
-```
+```yaml
 kind: Certificate
 spec:
   dnsNames:
