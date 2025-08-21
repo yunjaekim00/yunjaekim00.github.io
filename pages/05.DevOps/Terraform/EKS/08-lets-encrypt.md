@@ -32,9 +32,12 @@ CSR : Certificate Signing Request로 공개키가 포함되며 이것으로 CA�
 
 ### Let's Encrypt 종류
 #### HTTP-01 챌린지
-이 챌린지를 위해서는 단일 도메인을 테스트한다.
+이 챌린지를 위해서는 단일 도메인(예: `app1.plateer.io`)을 테스트한다.
+
+![center](./_images/Pasted%20image%2020250822024816.png)
+
 HTTP-01은 상대적으로 간단하지만
-조건이 HTTP endpoint가 있어야한다.
+조건이 위에 3번을 보면 HTTP endpoint가 있어야한다.
 이 얘기인즉슨 TLS termination을 해주는 Istio Gateway의 다음 코드에서
 
 ```yaml
@@ -48,7 +51,7 @@ HTTP-01은 상대적으로 간단하지만
       #   httpsRedirect: true
 ```
 
-TLS redirection을 해주면 안 된다.
+TLS redirection을 해주면 안 된다. (어차피 인증서가 없는 상태에서는 https로 redirect해도 아무것도 표시가 안 되니)
 즉, 위와 같이 **주석 처리**를 하고 우선 챌린지를 인증받고 인증서를 받은 후에 다시
 위 두 줄을 **주석 해제**를 하고 다시 적용해주어야 하는 번거로움이 있다.
 
