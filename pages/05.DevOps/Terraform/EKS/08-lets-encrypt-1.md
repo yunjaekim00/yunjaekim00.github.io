@@ -1,5 +1,5 @@
 ---
-title: 08. Lets Encrypt 인증서
+title: 08. Lets Encrypt 인증서 1
 date: 2025-08-21
 ---
 # 08. Lets Encrypt 인증서
