@@ -38,7 +38,8 @@ CSR : Certificate Signing Request로 공개키가 포함되며 이것으로 CA�
 
 HTTP-01은 상대적으로 간단하지만
 조건이 위에 3번을 보면 HTTP endpoint가 있어야한다.
-이 얘기인즉슨 TLS termination을 해주는 Istio Gateway의 다음 코드에서
+HTTP로 발급한 토큰(예시로 `SECRET123`)을 HTTP의 endpoint로 제공해야한다. (아직 인증서가 없으니깐 당연한 얘기지만)
+그러나 이 얘기인즉슨 설치과정에서, TLS termination을 해주는 Istio Gateway의 다음 코드에서
 
 ```yaml
     - port:
@@ -59,8 +60,11 @@ TLS redirection을 해주면 안 된다. (어차피 인증서가 없는 상태�
 
 #### DNS-01 챌린지
 Wildcard domain을 위해 사용한다. (예: `*.plateer.io`)
-Wildcard 도메인을 위한 ACME 챌린지는 특정 도메인(예: `app1.plateer.io`)의 HTTP endpoint를 요구하지 않는다.
-그러므로 위의 코드 두 줄을 주석처리했다가 다시 주석을 해제하지 않아도 된다.
+Wildcard 도메인을 위한 ACME 챌린지는 위의 HTTP-01처럼 특정 도메인(예: `app1.plateer.io`)의 HTTP endpoint를 요구하지 않는다. 대신 `plateer.io`의 소유자를 TXT record 생성으로 증명하게 한다.
+![](./_images/Pasted%20image%2020250822131909.png)
+즉, `http://`에 노출하지 않고 TXT record만 Route53에 생성하면 되니 
+주석처리했다가 다시 주석을 해제하지 않아도 된다.
+임시로 챌린지를 위해 생성된 TXT record는 인증 직후에 자동 삭제되므로, 인증서가 발급된 후에 AWS console의 Route53에 들어가면 보이지는 않는다.
 게다가 단일 도메인이 아니기 때문에, 도메인이 추가 될 때마다 다시 Certificate을 적용하고 ACME challenge를 하지 않아도 된다.
 
 ```yaml

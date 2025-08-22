@@ -222,7 +222,7 @@ service:
     targetPort: 443
 ```
 
-Istio를 설치하면 자동으로 CLB(Classic Load Balancer)가 설치가 되는데, AWS에서는 NLB 혹은 ALB의 설치를 권장한다. 이를 위해 위에서처럼 `nlb`를 annotation으로 설치해주었다.
+Azure혹은 GCP는 default가 NLB로 알고 있는데, AWS는 기본적으로 Istio를 설치하면 자동으로 CLB(Classic Load Balancer)가 설치가 되는데, AWS에서는 NLB 혹은 ALB의 설치를 권장한다. 이를 위해 위에서처럼 `nlb`를 annotation으로 위와 같이 명시해 주어야지 설치가 된다.
 이전 글에 설명한대로 `80`포트와 `443`포트는 Istio Gateway에 TLS termination을 시켜주기 위해 그대로 통과시킨다.
 
 `3-istio-gateway.tf` 추가 코드

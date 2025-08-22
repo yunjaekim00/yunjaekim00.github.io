@@ -49,7 +49,7 @@ resource "helm_release" "cert_manager" {
 }
 ```
 
-HTTP-01 챌린지를 위해서는 line 14까지만 필요하지만 DNS-01을 위해서는 위 주석내용에 썼듯이 추가적인 SA와 role 설정이 더 필요하다.
+HTTP-01 챌린지를 위해서는 line 14까지만 필요하지만 DNS-01을 위해서는 위 주석내용에 썼듯이 추가적인 SA(Service Account)와 IAM role 설정이 더 필요하다.
 
 `5-irsa.tf`
 ```hcl
@@ -133,6 +133,8 @@ resource "aws_iam_role_policy_attachment" "dns_manager" {
 
 아래 두 개 파일은 `.tf`파일이 아니고 `.yaml` 파일이다.
 
+*Issuer* 혹은 *ClusterIssuer* 를 생성하는 방법이 있는데, ClusterIssuer가 한 번만 생성하면 모든 namespace에서 사용할 수 있으므로 더 유동적이다.
+
 `issuer-production.yaml`생성
 ```yaml
 ---
@@ -200,3 +202,12 @@ kubectl get Certificate -A
 ```
 
 를 해서 Certificate의 READY 상태가 `true` 이면 챌린지를 통과하여 발급이 된 상태다.
+READY state가 3분 넘게 계속 `false`라면 
+
+```sh
+kubectl describe CertificateRequest
+kubectl describe Order   # Challenge가 생성되었는지 여부
+kubectl describe Challenge    # 만약 challege가 실패했다면 왜 실패했는지 보여준다.
+```
+
+로 troubleshoot한다.
