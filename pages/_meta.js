@@ -21,10 +21,12 @@ export default {
   "03.FrontEnd": {
     title: "FrontEnd",
     type: "page",
+    display: "hidden",
   },
   "04.BackEnd": {
     title: "BackEnd",
     type: "page",
+    display: "hidden",
   },
   "05.DevOps": {
     title: "DevOps",
