@@ -47,6 +47,7 @@ export default {
   },
   "09.작성중": {
     title: "작성 중인 글들",
+    type: "page",
     display: "hidden",
   }
 };
