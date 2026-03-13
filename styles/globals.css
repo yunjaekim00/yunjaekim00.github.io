@@ -91,3 +91,93 @@ img[alt*="400"] {
 img[alt*="450"] {
   width: 450px;
 }
+
+/* GitHub-style callouts (> [!NOTE], > [!TIP], etc.) */
+.markdown-alert {
+  border-left: 4px solid;
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 1rem;
+  margin: 1.25rem 0;
+}
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  font-size: 0.9rem;
+  margin-bottom: 0.4rem;
+  text-transform: capitalize;
+}
+/* NOTE – blue */
+.markdown-alert-note {
+  border-color: #3b82f6;
+  background-color: #eff6ff;
+}
+.markdown-alert-note .markdown-alert-title { color: #1d4ed8; }
+.dark .markdown-alert-note {
+  background-color: #1e3a5f;
+}
+.dark .markdown-alert-note .markdown-alert-title { color: #60a5fa; }
+/* TIP – green */
+.markdown-alert-tip {
+  border-color: #22c55e;
+  background-color: #f0fdf4;
+}
+.markdown-alert-tip .markdown-alert-title { color: #15803d; }
+.dark .markdown-alert-tip {
+  background-color: #14532d;
+}
+.dark .markdown-alert-tip .markdown-alert-title { color: #4ade80; }
+/* IMPORTANT – purple */
+.markdown-alert-important {
+  border-color: #a855f7;
+  background-color: #faf5ff;
+}
+.markdown-alert-important .markdown-alert-title { color: #7e22ce; }
+.dark .markdown-alert-important {
+  background-color: #3b0764;
+}
+.dark .markdown-alert-important .markdown-alert-title { color: #c084fc; }
+/* WARNING – yellow */
+.markdown-alert-warning {
+  border-color: #f59e0b;
+  background-color: #fffbeb;
+}
+.markdown-alert-warning .markdown-alert-title { color: #b45309; }
+.dark .markdown-alert-warning {
+  background-color: #451a03;
+}
+.dark .markdown-alert-warning .markdown-alert-title { color: #fbbf24; }
+/* CAUTION – red */
+.markdown-alert-caution {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+.markdown-alert-caution .markdown-alert-title { color: #b91c1c; }
+.dark .markdown-alert-caution {
+  background-color: #450a0a;
+}
+.dark .markdown-alert-caution .markdown-alert-title { color: #f87171; }
+/* SUMMARY – teal */
+.markdown-alert-summary {
+  border-color: #14b8a6;
+  background-color: #f0fdfa;
+}
+.markdown-alert-summary .markdown-alert-title { color: #0f766e; }
+.dark .markdown-alert-summary {
+  background-color: #134e4a;
+}
+.dark .markdown-alert-summary .markdown-alert-title { color: #2dd4bf; }
+/* QUOTE – gray */
+.markdown-alert-quote {
+  border-color: #94a3b8;
+  background-color: #f8fafc;
+}
+.markdown-alert-quote .markdown-alert-title { color: #475569; }
+.dark .markdown-alert-quote {
+  background-color: #1e293b;
+}
+.dark .markdown-alert-quote .markdown-alert-title { color: #94a3b8; }

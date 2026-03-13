@@ -6,7 +6,6 @@ date: 2024-10-08
 ## 개요
 
 ### AMI vs. Snapshot
-
 EC2 instance를 생성하게 되면 자동으로 root EBS volume이라는 것이 붙게된다.
 여기서 EBS volume이란 물리적인 저장소가 아닌 네트워크상의 HDD(SSD)같은 존재라고 보면 된다.
 물리적으로는 SATA나 USB에 꼽지만, 네트워크 상으로는 EBS volume을 같은 AZ에 있는 EC2에 꼽는다고 보면 된다.
