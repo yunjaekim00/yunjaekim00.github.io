@@ -20,11 +20,15 @@ function filterObsidianPages(pageMap) {
 						item.route === prefix || item.route.startsWith(prefix + "/")
 				)
 		)
-		.map((item) =>
-			item.children
-				? { ...item, children: filterObsidianPages(item.children) }
-				: item
-		);
+		.map((item) => {
+			// Normalize name to NFD so that Nextra's strict === comparison against
+			// _meta.js keys (which macOS stores as NFD) succeeds on Linux CI
+			// where fs.readdir returns NFC-normalized Unicode filenames.
+			const normalized = item.name ? { ...item, name: item.name.normalize("NFD") } : item;
+			return normalized.children
+				? { ...normalized, children: filterObsidianPages(normalized.children) }
+				: normalized;
+		});
 }
 
 const withNextra = nextra({
